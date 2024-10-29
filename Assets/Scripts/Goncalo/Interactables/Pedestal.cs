@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Pedestal : MonoBehaviour, IInteractable
 {
@@ -12,6 +13,24 @@ public class Pedestal : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject playerSpot;
 
+    private PlanetsEnum planet;
+    public PlanetsEnum Planet
+    {
+        get
+        {
+            return planet;
+        }
+        set
+        {
+            planet = value;
+            if (hasLantern)
+            {
+                //Immediately changes the lanter's energy if the lantern is on the pedestal
+                lantern.GetComponent<Lantern>().Planet = value;
+            }
+        }
+    }
+
     private bool hasLantern;
 
     private void Start()
@@ -19,27 +38,29 @@ public class Pedestal : MonoBehaviour, IInteractable
         hasLantern = true;
     }
 
-    private void FixedUpdate()
-    {
-        if (hasLantern)
-        {
-            //insert code to transfer energy to lantern
-        }
-    }
-
     public void Interact()
     {
+        //If the pedestal has the lantern, it moves to the player
         if (hasLantern)
         {
             lantern.transform.parent = playerSpot.transform;
+            //reseting the lantern's local position and rotation to make sure it always looks the same
             lantern.transform.localPosition = Vector3.zero;
+            lantern.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             hasLantern = false;
         }
+        //If the player has the lantern, it moves to the pedestal
         else if (!hasLantern)
         {
             lantern.transform.parent = pedestalSpot.transform;
+
+            //reseting the lantern's local position and rotation to make sure it always looks the same
             lantern.transform.localPosition = Vector3.zero;
+            lantern.transform.localRotation = Quaternion.Euler(0f,0f,0f);
             hasLantern = true;
+
+            //sets the lantern's energy when the player puts it on the pedestal
+            lantern.GetComponent<Lantern>().Planet = Planet;
         }
 
         StartCoroutine(InteractedCoroutine());
