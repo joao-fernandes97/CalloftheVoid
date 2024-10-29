@@ -47,6 +47,7 @@ public class Pedestal : MonoBehaviour, IInteractable
             //reseting the lantern's local position and rotation to make sure it always looks the same
             lantern.transform.localPosition = Vector3.zero;
             lantern.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            lantern.GetComponent<Lantern>().OnPlayer = true;
             hasLantern = false;
         }
         //If the player has the lantern, it moves to the pedestal
@@ -57,6 +58,7 @@ public class Pedestal : MonoBehaviour, IInteractable
             //reseting the lantern's local position and rotation to make sure it always looks the same
             lantern.transform.localPosition = Vector3.zero;
             lantern.transform.localRotation = Quaternion.Euler(0f,0f,0f);
+            lantern.GetComponent<Lantern>().OnPlayer = false;
             hasLantern = true;
 
             //sets the lantern's energy when the player puts it on the pedestal

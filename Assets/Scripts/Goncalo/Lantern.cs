@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Lantern : MonoBehaviour
+public class Lantern : MonoBehaviour, IUsable
 {
     [SerializeField]
     private Material defaultMat;
@@ -14,6 +14,12 @@ public class Lantern : MonoBehaviour
     private Material eclipse;
     [SerializeField]
     private Material neptune;
+    [SerializeField]
+    private GameObject particles;
+
+    private Collider energyCollider;
+
+    public bool OnPlayer {  get; set; } = false;
 
     private PlanetsEnum planet;
     public PlanetsEnum Planet
@@ -29,6 +35,28 @@ public class Lantern : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        energyCollider = GetComponent<Collider>();
+    }
+
+    private void Update()
+    {
+        //this part is temporary and will be replaced by the Use() method when the inventory system is finished
+        //------
+        if (Input.GetMouseButtonDown(0))
+        {
+            energyCollider.enabled = true;
+            particles.SetActive(true);
+        }
+        //------
+        if (Input.GetMouseButtonUp(0))
+        {
+            energyCollider.enabled = false;
+            particles.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Changes the lantern's appearance depending on the energy
     /// </summary>
@@ -36,28 +64,40 @@ public class Lantern : MonoBehaviour
     private void SetEnergy(PlanetsEnum planet)
     {
         Renderer renderer = GetComponent<Renderer>();
+        ParticleSystem.MainModule main = particles.GetComponent<ParticleSystem>().main;
         switch (planet)
         {
             case PlanetsEnum.None:
                 renderer.material = defaultMat;
+                main.startColor = defaultMat.color;
                 break;
             case PlanetsEnum.Mars:
                 renderer.material = mars;
+                main.startColor = mars.color;
                 break;
             case PlanetsEnum.Jupiter:
                 renderer.material = jupiter;
+                main.startColor = jupiter.color;
                 break;
             case PlanetsEnum.Saturn:
                 renderer.material = saturn;
+                main.startColor = saturn.color;
                 break;
             case PlanetsEnum.Eclipse:
                 renderer.material = eclipse;
+                main.startColor = eclipse.color;
                 break;
             case PlanetsEnum.Neptune:
                 renderer.material = neptune;
+                main.startColor = neptune.color;
                 break;
             default:
                 break;
         }
+    }
+
+    public void Use()
+    {
+        //energyCollider.enabled = true;
     }
 }
