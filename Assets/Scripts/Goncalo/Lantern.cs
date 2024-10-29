@@ -58,7 +58,7 @@ public class Lantern : MonoBehaviour, IUsable
     }
 
     /// <summary>
-    /// Changes the lantern's appearance depending on the energy
+    /// Changes the lantern's appearance and particles depending on the energy
     /// </summary>
     /// <param name="planet"></param>
     private void SetEnergy(PlanetsEnum planet)
