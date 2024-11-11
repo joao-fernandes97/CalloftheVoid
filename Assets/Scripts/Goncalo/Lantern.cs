@@ -42,14 +42,6 @@ public class Lantern : MonoBehaviour, IUsable
 
     private void Update()
     {
-        //this part is temporary and will be replaced by the Use() method when the inventory system is finished
-        //------
-        if (Input.GetMouseButtonDown(0))
-        {
-            energyCollider.enabled = true;
-            particles.SetActive(true);
-        }
-        //------
         if (Input.GetMouseButtonUp(0))
         {
             energyCollider.enabled = false;
@@ -98,6 +90,7 @@ public class Lantern : MonoBehaviour, IUsable
 
     public void Use()
     {
-        //energyCollider.enabled = true;
+        energyCollider.enabled = true;
+        particles.SetActive(true);
     }
 }

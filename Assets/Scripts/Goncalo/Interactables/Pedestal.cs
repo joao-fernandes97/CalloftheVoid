@@ -13,6 +13,10 @@ public class Pedestal : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject playerSpot;
 
+    [SerializeField]
+    private int itemNumber;
+    private PlayerInventory playerInventory;
+
     private PlanetsEnum planet;
     public PlanetsEnum Planet
     {
@@ -36,6 +40,7 @@ public class Pedestal : MonoBehaviour, IInteractable
     private void Start()
     {
         hasLantern = true;
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
     }
 
     public void Interact()
@@ -44,14 +49,19 @@ public class Pedestal : MonoBehaviour, IInteractable
         if (hasLantern)
         {
             lantern.transform.parent = playerSpot.transform;
+
             //reseting the lantern's local position and rotation to make sure it always looks the same
             lantern.transform.localPosition = Vector3.zero;
             lantern.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+
             lantern.GetComponent<Lantern>().OnPlayer = true;
+
+            //Does the necessary changes to the inventory
+            playerInventory.NewItem(itemNumber);
             hasLantern = false;
         }
         //If the player has the lantern, it moves to the pedestal
-        else if (!hasLantern)
+        else if (!hasLantern && lantern.activeInHierarchy)
         {
             lantern.transform.parent = pedestalSpot.transform;
 
@@ -59,6 +69,9 @@ public class Pedestal : MonoBehaviour, IInteractable
             lantern.transform.localPosition = Vector3.zero;
             lantern.transform.localRotation = Quaternion.Euler(0f,0f,0f);
             lantern.GetComponent<Lantern>().OnPlayer = false;
+
+            //Deactivates the player's lantern slot
+            playerSpot.SetActive(false);
             hasLantern = true;
 
             //sets the lantern's energy when the player puts it on the pedestal
