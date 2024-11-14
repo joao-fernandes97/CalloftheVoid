@@ -25,13 +25,21 @@ public class EyeFollow : MonoBehaviour
     public bool _canBlink { get; set; } = true;
     private bool _openAnimationDone = false;
 
-   
-    private void Awake()    {
+    private void OnEnable() 
+    {
+        firstBlink = false;
         active = true;
         blinkTracker = blinkInterval;
         animator.Play("Default");
+        
     }
-    
+    private void Awake()    
+    {
+        firstBlink = false;
+        active = true;
+        blinkTracker = blinkInterval;
+        animator.Play("Default");
+    }   
 
 
     void LateUpdate()
@@ -46,7 +54,7 @@ public class EyeFollow : MonoBehaviour
         }
         else
         {
-            FollowTargetLerped(restPoint.position);
+            ResetEye();          
 
         }
         
@@ -63,14 +71,14 @@ public class EyeFollow : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(direction.normalized,Vector3.up);
         return rot;
     }
-    private bool FacingTarget(Vector3 target)
-    {
-        Vector3 direction = (target - Origin.position).normalized;
-        if(Vector3.Dot(Origin.forward,direction)< .7f) return false; 
-        else return true;
+    // private bool FacingTarget(Vector3 target)
+    // {
+    //     Vector3 direction = (target - Origin.position).normalized;
+    //     if(Vector3.Dot(Origin.forward,direction)< .7f) return false; 
+    //     else return true;
 
-    }
-    public bool CheckIfAtRest() => FacingTarget(restPoint.position);
+    // }
+    //public bool CheckIfAtRest() => FacingTarget(restPoint.position);
     private void FollowTargetLerped(Vector3 target)
     {
         Origin.rotation = Quaternion.Lerp(Origin.rotation, LookAtTarget(target), RotationSpeed * Time.fixedDeltaTime);
@@ -82,13 +90,18 @@ public class EyeFollow : MonoBehaviour
     {
         animator.Play("Open");
         firstBlink = true;
-    } 
-    public void ResetEye()
+    }
+    public void CloseEye()
     {
         active = false;
+    }
+
+    private void ResetEye()
+    { 
         animator.Play("Blink");
         blinkTracker = blinkInterval;
         firstBlink = false;
+        FollowTargetLerped(restPoint.position);
     }
     private void BlinkRandom()
     {

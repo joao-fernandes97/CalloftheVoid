@@ -6,6 +6,9 @@ public class EyeHandler : MonoBehaviour
     private EyeFollow _eyeFollowScript;
     private WeightedTransformCopy_v2 _weightedTransformsCopyScript;
     private Animator _eyeAnimator;
+    private float _resetDelay = 1f;
+    private Coroutine closingRoutine = null;
+
     
     void Awake()
     {
@@ -21,33 +24,32 @@ public class EyeHandler : MonoBehaviour
     }   
     public void EnableEye()
     {
+        if (closingRoutine != null)
+        {
+            StopCoroutine(closingRoutine);
+            _eyeFollowScript.enabled = false;
+            _weightedTransformsCopyScript.enabled = false;
+        }
         _eyeFollowScript.enabled = true;
         _weightedTransformsCopyScript.enabled = true;
+        
     }
     public void DisableEye()
     {
+        closingRoutine = StartCoroutine(CloseEyeAndDisableScript(_resetDelay));
         
-        
-        StartCoroutine(CloseEyeAndDisableScript());
-        
-
-
     }   
-    IEnumerator CloseEyeAndDisableScript()
+    IEnumerator CloseEyeAndDisableScript(float delay)
     {
-        _eyeFollowScript.ResetEye();
-        while (!_eyeFollowScript.CheckIfAtRest())
-        {
-            Debug.Log("Closing eye...");
-            yield return null;
-           
-        }
-        //
+        
+        _eyeFollowScript.CloseEye();
+        yield return new WaitForSeconds(delay);       
         _eyeFollowScript.enabled = false;
         _weightedTransformsCopyScript.enabled = false;
-        Debug.Log("Eye closed...");
+       
 
     }
+    
   
 
 
