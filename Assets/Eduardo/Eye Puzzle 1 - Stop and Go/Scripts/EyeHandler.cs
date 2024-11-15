@@ -3,18 +3,27 @@ using UnityEngine;
 
 public class EyeHandler : MonoBehaviour
 {
+    [SerializeField] private bool _blinks = false;
     private EyeFollow _eyeFollowScript;
     private WeightedTransformCopy_v2 _weightedTransformsCopyScript;
     private Animator _eyeAnimator;
     private float _resetDelay = 1f;
     private Coroutine closingRoutine = null;
 
+     
+    private void FixedUpdate() 
+    {
+        if (_eyeFollowScript._canBlink != _blinks)
+        _eyeFollowScript._canBlink = _blinks;
+
+    }
     
     void Awake()
     {
         _eyeFollowScript = GetComponentInChildren<EyeFollow>();
         _weightedTransformsCopyScript = GetComponentInChildren<WeightedTransformCopy_v2>();
         _eyeAnimator = GetComponentInChildren<Animator>();
+
         
         //Eyes off by default
 
