@@ -1,6 +1,5 @@
 using System;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,12 +43,12 @@ public class OrreryControl : MonoBehaviour
     }
     
     public void SelectOuter(){
-        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex+1,0,planetOrbits.Length);
+        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex+1,0,planetOrbits.Length-1);
         Debug.Log($"SelectOuter: {activePlanetOrbitIndex}");
     }
 
     public void SelectInner(){
-        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex-1,0,planetOrbits.Length);
+        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex-1,0,planetOrbits.Length-1);
         Debug.Log($"SelectInner: {activePlanetOrbitIndex}");
     }
 
