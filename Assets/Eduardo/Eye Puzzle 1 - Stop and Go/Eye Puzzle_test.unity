@@ -2893,6 +2893,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blinks: 1
+--- !u!1 &789860088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789860089}
+  m_Layer: 0
+  m_Name: Expel Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789860089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789860088}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.15691823, z: -0, w: 0.9876116}
+  m_LocalPosition: {x: -3.27, y: 1, z: -3.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 18.056, z: 0}
 --- !u!1 &808892261
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +7176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091108645}
   - component: {fileID: 2091108644}
+  - component: {fileID: 2091108646}
   - component: {fileID: 2091108643}
   m_Layer: 0
   m_Name: Stop and Go Puzzle
@@ -7172,7 +7204,7 @@ MonoBehaviour:
   - {fileID: 181960853}
   - {fileID: 836812695}
   _maxSpeedTolerance: 0.1
-  _failureCountDown: 4
+  _failureCountDown: 1
   _failureCountDownSpeed: 1
 --- !u!54 &2091108644
 Rigidbody:
@@ -7217,6 +7249,20 @@ Transform:
   - {fileID: 1848969958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2091108646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091108642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e0cf199bfc4f34e82309e19e9af51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teleportTime: 2
+  _destination: {fileID: 789860089}
 --- !u!1 &2109330462
 GameObject:
   m_ObjectHideFlags: 0
@@ -8069,6 +8115,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1846294714}
   - {fileID: 397445269}
+  - {fileID: 789860089}
   - {fileID: 1809445939}
   - {fileID: 684012303}
   - {fileID: 1244019681}

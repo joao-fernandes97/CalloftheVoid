@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,7 +19,7 @@ public class StartAndStop : MonoBehaviour
     [SerializeField] private float _failureCountDown = 10f;
     private float _failureCountDownMax;
     [SerializeField] private float _failureCountDownSpeed = 0.1f;
-    
+    private Expulsion expel;
     private PlayerMovement _playerMov = null;
     private CharacterController _playerCharacterCtrl = null;
     private float _playerVelocity;
@@ -46,7 +47,7 @@ public class StartAndStop : MonoBehaviour
     {
        eyeGameState = GameState.NotStarted;
         _failureCountDownMax = _failureCountDown;
-       
+        expel = GetComponent<Expulsion>();
         if (_eyes.Length == 0)
             Debug.LogWarning("No eyes inserted into \"TriggerEyeArea\" Script Array");
     }
@@ -88,8 +89,10 @@ public class StartAndStop : MonoBehaviour
         {
             if (!FailedAndStopedDirty)
             {
+                Failure();
                 //Dirty flag? Well this only happens once
                 DisableEyes();
+                
                 Debug.Log("GameState set to : FailedAndStoped");
                 FailedAndStopedDirty = true;
             }
@@ -103,6 +106,7 @@ public class StartAndStop : MonoBehaviour
     {
         //Track speed:
         _playerVelocity = _playerCharacterCtrl.velocity.magnitude;
+        
         //Debug.Log($"Player speed : {_playerVelocity}");
 
         //Just track velocity and if he's going too fast or moving while eyes are
@@ -135,6 +139,7 @@ public class StartAndStop : MonoBehaviour
         else
         {
             Debug.Log("Player failed");
+           
             //Run Failure sequence
             //  Push player out
             // Door closes
@@ -148,7 +153,19 @@ public class StartAndStop : MonoBehaviour
         }
         
     }
-    
+
+    private void Failure()
+    {
+        
+        Debug.Log("You will be expelled in 2 seconds");
+        expel.Expel(_playerMov.gameObject);
+        //Reset 
+        _failureCountDown = _failureCountDownMax;
+        _playerFailed = false;
+        _playerInside = false;
+        Debug.Log("You were expelled");
+    }
+
     private void CountToFailure()
     {
         if (_failureCountDown > 0.0f)
@@ -157,6 +174,7 @@ public class StartAndStop : MonoBehaviour
             _failureCountDown -=_failureCountDownSpeed * Time.fixedDeltaTime;
             Debug.Log($"Failure Count Down = {_failureCountDown}");
         }
+        
     }
     private void ReplenishCountDown(float rate = 1f)
     {
@@ -181,7 +199,6 @@ public class StartAndStop : MonoBehaviour
         }
         if (_playerFailed && !_playerInside) 
         {
-           
             eyeGameState = GameState.NotStarted;
             FailedAndStopedDirty = false;
         }
@@ -203,6 +220,7 @@ public class StartAndStop : MonoBehaviour
         //if player entered once and activated the puzzle
         if (_playerMov != null)
         {
+            _failureCountDown = 0;
             _playerVelocity = 0f;
             _playerInside = false;
             DisableEyes();
