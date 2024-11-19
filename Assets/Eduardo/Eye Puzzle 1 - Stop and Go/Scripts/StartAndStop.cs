@@ -14,8 +14,8 @@ public class StartAndStop : MonoBehaviour
     [SerializeField] private EyeHandler[] _eyes;
     [Header ("Puzzle Params")]
     //At this speed, the fail timer starts counting down
-    [SerializeField] private float _maxSpeedTolerance = 3f;
-    [SerializeField] private float _failureCountDown = 50f;
+    [SerializeField] private float _maxSpeedTolerance = 1f;
+    [SerializeField] private float _failureCountDown = 10f;
     private float _failureCountDownMax;
     [SerializeField] private float _failureCountDownSpeed = 0.1f;
     
@@ -78,10 +78,10 @@ public class StartAndStop : MonoBehaviour
         {
             if (!StartedAndGoingDirty)
             {
-                StartAndStopGame();
-                Debug.Log("GameState set to : StartedAndGoing");
+                 Debug.Log("GameState set to : StartedAndGoing");
                 StartedAndGoingDirty = true;
             }
+            else StartAndStopGame();
             
         }
         if (eyeGameState == GameState.FailedAndStoped)
@@ -103,7 +103,7 @@ public class StartAndStop : MonoBehaviour
     {
         //Track speed:
         _playerVelocity = _playerCharacterCtrl.velocity.magnitude;
-        Debug.Log($"Player speed : {_playerVelocity}");
+        //Debug.Log($"Player speed : {_playerVelocity}");
 
         //Just track velocity and if he's going too fast or moving while eyes are
         //open then decrease value
@@ -111,7 +111,7 @@ public class StartAndStop : MonoBehaviour
         
         //reset failureCountdown when :
         // player fails then exits
-        if (!_playerFailed)
+        if (_playerFailed == false)
         {
             if (_playerVelocity >= _maxSpeedTolerance)
             {
@@ -153,14 +153,16 @@ public class StartAndStop : MonoBehaviour
     {
         if (_failureCountDown > 0.0f)
         {
-            _failureCountDown = -_failureCountDownSpeed * Time.fixedDeltaTime;
+            Debug.Log($"Time.fixedDeltaTime ={Time.fixedDeltaTime}");
+            _failureCountDown -=_failureCountDownSpeed * Time.fixedDeltaTime;
             Debug.Log($"Failure Count Down = {_failureCountDown}");
         }
     }
     private void ReplenishCountDown(float rate = 1f)
     {
-        Debug.Log("Replenishing CountDown");
-        _failureCountDown = +_failureCountDownSpeed * rate * Time.fixedDeltaTime;
+        //Debug.Log("Replenishing CountDown");
+        Debug.Log($"Failure Count Down = {_failureCountDown}");
+        _failureCountDown +=_failureCountDownSpeed * rate * Time.fixedDeltaTime;
     }
     private void SetGameState()
     {
