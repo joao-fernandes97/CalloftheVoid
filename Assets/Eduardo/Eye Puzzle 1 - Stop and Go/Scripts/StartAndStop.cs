@@ -1,0 +1,250 @@
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class StartAndStop : MonoBehaviour
+{
+    //reference to the eyes
+    //all we will do is implicitly turn them on and off at random intervals
+    //during those intervals the player isint being tracked
+    //reference to the player
+  
+
+    [Header("Eyes STOP AND GO")]
+    [SerializeField] private EyeHandler[] _eyes;
+    [Header ("Puzzle Params")]
+    //At this speed, the fail timer starts counting down
+    [SerializeField] private float _maxSpeedTolerance = 1f;
+    [SerializeField] private float _failureCountDown = 10f;
+    private float _failureCountDownMax;
+    [SerializeField] private float _failureCountDownSpeed = 0.1f;
+    private Expulsion expel;
+    private PlayerMovement _playerMov = null;
+    private CharacterController _playerCharacterCtrl = null;
+    private float _playerVelocity;
+    
+    GameState eyeGameState;
+    
+    // Game play logic:
+    private enum GameState
+    {
+        NotStarted,
+        StartedAndGoing,
+        FailedAndStoped
+    }
+    private bool _playerInside = false;
+    private bool _playerPlaying = false;
+    private bool _playerFailed = false;
+    private bool NotStartedFlagDirty = false;
+    private bool StartedAndGoingDirty = false;
+    private bool FailedAndStopedDirty = false;
+
+    
+   
+
+    private void Start()
+    {
+       eyeGameState = GameState.NotStarted;
+        _failureCountDownMax = _failureCountDown;
+        expel = GetComponent<Expulsion>();
+        if (_eyes.Length == 0)
+            Debug.LogWarning("No eyes inserted into \"TriggerEyeArea\" Script Array");
+    }
+
+
+    //Use the SetGameState to check and change game states
+    //Fixed Update is then mostly used to run game logic set in each game state
+
+
+    private void FixedUpdate() 
+    {
+        SetGameState();
+
+        //Stop and go logic
+        if (eyeGameState == GameState.NotStarted)
+        {
+            if (!NotStartedFlagDirty)
+            {
+                //Move this logic to the State switcher
+                //Dirty flag? Well this only happens once
+                DisableEyes();
+                Debug.Log("GameState set to : NotStarted");
+                NotStartedFlagDirty = true;
+            }
+            
+            
+        }
+        if (eyeGameState == GameState.StartedAndGoing)
+        {
+            if (!StartedAndGoingDirty)
+            {
+                 Debug.Log("GameState set to : StartedAndGoing");
+                StartedAndGoingDirty = true;
+            }
+            else StartAndStopGame();
+            
+        }
+        if (eyeGameState == GameState.FailedAndStoped)
+        {
+            if (!FailedAndStopedDirty)
+            {
+                Failure();
+                //Dirty flag? Well this only happens once
+                DisableEyes();
+                
+                Debug.Log("GameState set to : FailedAndStoped");
+                FailedAndStopedDirty = true;
+            }
+            
+        }
+        
+
+    }
+
+    private void StartAndStopGame()
+    {
+        //Track speed:
+        _playerVelocity = _playerCharacterCtrl.velocity.magnitude;
+        
+        //Debug.Log($"Player speed : {_playerVelocity}");
+
+        //Just track velocity and if he's going too fast or moving while eyes are
+        //open then decrease value
+        if (_failureCountDown <= 0.0f) _playerFailed = true;
+        
+        //reset failureCountdown when :
+        // player fails then exits
+        if (_playerFailed == false)
+        {
+            if (_playerVelocity >= _maxSpeedTolerance)
+            {
+                CountToFailure();
+                Debug.Log($"Counting down. Time left = {_failureCountDown}");
+            }
+            else
+            {
+                if (_failureCountDownMax > _failureCountDown)
+                {
+                    ReplenishCountDown(.5f);
+                    if(_failureCountDown >_failureCountDownMax)
+                    {
+                        _failureCountDown = _failureCountDownMax;
+                    } 
+
+                }
+                
+            }
+        }
+        else
+        {
+            Debug.Log("Player failed");
+           
+            //Run Failure sequence
+            //  Push player out
+            // Door closes
+            // playerFailed = false;
+            //
+            //Then at the end change the GameState to failure or handle
+            //the kicking out and reset behaviour in the gamestate itself
+            //And only change states here.
+
+
+        }
+        
+    }
+
+    private void Failure()
+    {
+        
+        Debug.Log("You will be expelled in 2 seconds");
+        expel.Expel(_playerMov.gameObject);
+        //Reset 
+        _failureCountDown = _failureCountDownMax;
+        _playerFailed = false;
+        _playerInside = false;
+        Debug.Log("You were expelled");
+    }
+
+    private void CountToFailure()
+    {
+        if (_failureCountDown > 0.0f)
+        {
+            Debug.Log($"Time.fixedDeltaTime ={Time.fixedDeltaTime}");
+            _failureCountDown -=_failureCountDownSpeed * Time.fixedDeltaTime;
+            Debug.Log($"Failure Count Down = {_failureCountDown}");
+        }
+        
+    }
+    private void ReplenishCountDown(float rate = 1f)
+    {
+        //Debug.Log("Replenishing CountDown");
+        Debug.Log($"Failure Count Down = {_failureCountDown}");
+        _failureCountDown +=_failureCountDownSpeed * rate * Time.fixedDeltaTime;
+    }
+    private void SetGameState()
+    {
+        if (_playerInside && !_playerPlaying) _playerPlaying = true;
+        else if (_playerInside && _playerPlaying)
+        {
+            eyeGameState = GameState.StartedAndGoing;
+            NotStartedFlagDirty = false;
+
+        }
+        if ((_playerFailed &&  _playerInside)|| (!_playerInside && _playerPlaying))
+        {
+             //Player entered. But then left. He didn't loose but we set the state to failure/stop
+            eyeGameState = GameState.FailedAndStoped;
+            StartedAndGoingDirty = false;
+        }
+        if (_playerFailed && !_playerInside) 
+        {
+            eyeGameState = GameState.NotStarted;
+            FailedAndStopedDirty = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _playerMov = other.gameObject.GetComponent<PlayerMovement>();
+        if (_playerMov != null)
+        {
+            _playerCharacterCtrl = other.gameObject.GetComponent<CharacterController>();
+            EnableEyes();
+            _playerInside = true;
+            Debug.Log("Player entered Eye perimeter");
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        //if player entered once and activated the puzzle
+        if (_playerMov != null)
+        {
+            _failureCountDown = 0;
+            _playerVelocity = 0f;
+            _playerInside = false;
+            DisableEyes();
+            Debug.Log("Player exited Eye perimeter");
+        }
+    }
+    private void EnableEyes()
+    {
+        if (_eyes.Length != 0)
+            foreach (EyeHandler eye in _eyes)
+                eye.EnableEye();
+    }
+    private void DisableEyes()
+    {
+        if (_eyes.Length != 0)
+            foreach (EyeHandler eye in _eyes)
+                eye.DisableEye();
+
+    }
+    //If player gets the thing
+    private void PlayerWins()
+    {
+        _playerCharacterCtrl = null;
+         _playerMov = null;
+    }
+
+}
