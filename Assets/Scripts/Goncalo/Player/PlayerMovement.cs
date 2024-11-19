@@ -12,6 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private float maxStrafeSpeed;
     [SerializeField]
     private float walkMultiplier;
+    [SerializeField]
+    private Transform groundCheck;
+    [SerializeField]
+    private float groundDistance;
+    [SerializeField]
+    private LayerMask groundLayerMask;
 
     [Header("Camera")]
     [SerializeField]
@@ -19,11 +25,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxLookDownAngle;
 
+
+
     private CharacterController controller;
     private Transform head;
     private Vector3 headRotation;
     private Vector3 velocity;
     private Vector3 motion;
+    private float vSpeed;
+    private bool isGrounded;
 
     private void Start()
     {
@@ -42,6 +52,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //checks if the player is grounded
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayerMask);
+
         UpdateRotation();
         UpdateHead();
     }
@@ -111,6 +124,19 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = velocity.normalized * (forwardAxis > 0 ? maxForwardSpeed : maxBackwardSpeed);
         }
+
+        // apply gravity acceleration to vertical speed:
+        vSpeed += Physics.gravity.y * Time.fixedDeltaTime;
+
+        //resets speed and prevents it to keep growing
+        //also helps with good movement on ramps
+        if (isGrounded && velocity.y < 0)
+        {
+            vSpeed = -2f;
+        }
+
+        // include vertical speed in vel
+        velocity.y = vSpeed;
     }
 
     /// <summary>
