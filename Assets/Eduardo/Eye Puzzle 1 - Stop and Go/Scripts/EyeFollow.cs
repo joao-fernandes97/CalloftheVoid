@@ -81,6 +81,7 @@ public class EyeFollow : MonoBehaviour
     //public bool CheckIfAtRest() => FacingTarget(restPoint.position);
     private void FollowTargetLerped(Vector3 target)
     {
+        //Debug.Log($"Position is being tracked {target}.");
         Origin.rotation = Quaternion.Lerp(Origin.rotation, LookAtTarget(target), RotationSpeed * Time.fixedDeltaTime);
     }
     

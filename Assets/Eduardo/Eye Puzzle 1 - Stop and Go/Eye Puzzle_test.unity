@@ -2162,7 +2162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9728fdeb59439e469aa4644caf43616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyeHandler: {fileID: 0}
+  _eyeHandler: {fileID: 33402451}
 --- !u!1 &557384923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4130,7 +4130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9728fdeb59439e469aa4644caf43616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyeHandler: {fileID: 0}
+  _eyeHandler: {fileID: 953747683}
 --- !u!1 &1335645452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5016,7 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9728fdeb59439e469aa4644caf43616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyeHandler: {fileID: 0}
+  _eyeHandler: {fileID: 181960853}
 --- !u!1 &1695377677
 GameObject:
   m_ObjectHideFlags: 0
@@ -5389,6 +5389,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 85702018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1790670821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1790670824}
+  - component: {fileID: 1790670823}
+  - component: {fileID: 1790670822}
+  m_Layer: 0
+  m_Name: 'Post processing '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1790670822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790670821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.4567146, y: 7.038443, z: 2.8511183}
+  m_Center: {x: 0, y: 0, z: 4.2894306}
+--- !u!114 &1790670823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790670821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 1.2
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: c3972c97213948148af86b5a1de1d4dd, type: 2}
+--- !u!4 &1790670824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790670821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.031073555, y: 0.984323, z: -0.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799703806
 GameObject:
   m_ObjectHideFlags: 0
@@ -5539,7 +5610,7 @@ MonoBehaviour:
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
+  m_VolumeTrigger: {fileID: 1809445939}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
@@ -6313,7 +6384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9728fdeb59439e469aa4644caf43616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyeHandler: {fileID: 0}
+  _eyeHandler: {fileID: 836812695}
 --- !u!1 &1938312807
 GameObject:
   m_ObjectHideFlags: 0
@@ -6719,7 +6790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9728fdeb59439e469aa4644caf43616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eyeHandler: {fileID: 0}
+  _eyeHandler: {fileID: 1799703808}
 --- !u!1 &2033029331
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,8 +7043,8 @@ MonoBehaviour:
   - {fileID: 1799703808}
   - {fileID: 181960853}
   - {fileID: 836812695}
-  _maxSpeedTolerance: 1.5
-  _failureCountDown: 20
+  _maxSpeedTolerance: 3
+  _failureCountDown: 50
   _failureCountDownSpeed: 0.1
 --- !u!54 &2091108644
 Rigidbody:
@@ -7876,3 +7947,4 @@ SceneRoots:
   - {fileID: 118821361}
   - {fileID: 23330874}
   - {fileID: 2091108645}
+  - {fileID: 1790670824}

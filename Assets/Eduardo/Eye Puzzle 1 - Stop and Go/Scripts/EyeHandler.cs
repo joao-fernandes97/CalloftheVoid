@@ -33,6 +33,7 @@ public class EyeHandler : MonoBehaviour
     }   
     public void EnableEye()
     {
+        Debug.Log($"EyeHandler: {gameObject.name} EnableEyes() triggered");
         if (closingRoutine != null)
         {
             StopCoroutine(closingRoutine);
@@ -45,6 +46,7 @@ public class EyeHandler : MonoBehaviour
     }
     public void DisableEye()
     {
+        Debug.Log($"EyeHandler: {gameObject.name} DisableEye() triggered");
         closingRoutine = StartCoroutine(CloseEyeAndDisableScript(_resetDelay));
         
     }   

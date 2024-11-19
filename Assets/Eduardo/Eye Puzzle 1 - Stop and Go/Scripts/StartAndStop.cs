@@ -14,8 +14,8 @@ public class StartAndStop : MonoBehaviour
     [SerializeField] private EyeHandler[] _eyes;
     [Header ("Puzzle Params")]
     //At this speed, the fail timer starts counting down
-    [SerializeField] private float _maxSpeedTolerance = 1.5f;
-    [SerializeField] private float _failureCountDown = 5;
+    [SerializeField] private float _maxSpeedTolerance = 3f;
+    [SerializeField] private float _failureCountDown = 50f;
     private float _failureCountDownMax;
     [SerializeField] private float _failureCountDownSpeed = 0.1f;
     
@@ -35,6 +35,9 @@ public class StartAndStop : MonoBehaviour
     private bool _playerInside = false;
     private bool _playerPlaying = false;
     private bool _playerFailed = false;
+    private bool NotStartedFlagDirty = false;
+    private bool StartedAndGoingDirty = false;
+    private bool FailedAndStopedDirty = false;
 
     
    
@@ -52,6 +55,7 @@ public class StartAndStop : MonoBehaviour
     //Use the SetGameState to check and change game states
     //Fixed Update is then mostly used to run game logic set in each game state
 
+
     private void FixedUpdate() 
     {
         SetGameState();
@@ -59,19 +63,37 @@ public class StartAndStop : MonoBehaviour
         //Stop and go logic
         if (eyeGameState == GameState.NotStarted)
         {
-            DisableEyes();
-            Debug.Log("GameState set to : NotStarted");
-
+            if (!NotStartedFlagDirty)
+            {
+                //Move this logic to the State switcher
+                //Dirty flag? Well this only happens once
+                DisableEyes();
+                Debug.Log("GameState set to : NotStarted");
+                NotStartedFlagDirty = true;
+            }
+            
+            
         }
         if (eyeGameState == GameState.StartedAndGoing)
         {
-            StartAndStopGame();
-            Debug.Log("GameState set to : StartedAndGoing");
+            if (!StartedAndGoingDirty)
+            {
+                StartAndStopGame();
+                Debug.Log("GameState set to : StartedAndGoing");
+                StartedAndGoingDirty = true;
+            }
+            
         }
         if (eyeGameState == GameState.FailedAndStoped)
         {
-            DisableEyes();
-            Debug.Log("GameState set to : FailedAndStoped");
+            if (!FailedAndStopedDirty)
+            {
+                //Dirty flag? Well this only happens once
+                DisableEyes();
+                Debug.Log("GameState set to : FailedAndStoped");
+                FailedAndStopedDirty = true;
+            }
+            
         }
         
 
@@ -85,7 +107,7 @@ public class StartAndStop : MonoBehaviour
 
         //Just track velocity and if he's going too fast or moving while eyes are
         //open then decrease value
-        if (_failureCountDown > 0.0f) _playerFailed = true;
+        if (_failureCountDown <= 0.0f) _playerFailed = true;
         
         //reset failureCountdown when :
         // player fails then exits
@@ -132,13 +154,12 @@ public class StartAndStop : MonoBehaviour
         if (_failureCountDown > 0.0f)
         {
             _failureCountDown = -_failureCountDownSpeed * Time.fixedDeltaTime;
-            
+            Debug.Log($"Failure Count Down = {_failureCountDown}");
         }
-        
-    
     }
     private void ReplenishCountDown(float rate = 1f)
     {
+        Debug.Log("Replenishing CountDown");
         _failureCountDown = +_failureCountDownSpeed * rate * Time.fixedDeltaTime;
     }
     private void SetGameState()
@@ -147,9 +168,21 @@ public class StartAndStop : MonoBehaviour
         else if (_playerInside && _playerPlaying)
         {
             eyeGameState = GameState.StartedAndGoing;
-            
-        }
+            NotStartedFlagDirty = false;
 
+        }
+        if ((_playerFailed &&  _playerInside)|| (!_playerInside && _playerPlaying))
+        {
+             //Player entered. But then left. He didn't loose but we set the state to failure/stop
+            eyeGameState = GameState.FailedAndStoped;
+            StartedAndGoingDirty = false;
+        }
+        if (_playerFailed && !_playerInside) 
+        {
+           
+            eyeGameState = GameState.NotStarted;
+            FailedAndStopedDirty = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -158,21 +191,19 @@ public class StartAndStop : MonoBehaviour
         if (_playerMov != null)
         {
             _playerCharacterCtrl = other.gameObject.GetComponent<CharacterController>();
-            //EnableEyes();
+            EnableEyes();
             _playerInside = true;
             Debug.Log("Player entered Eye perimeter");
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        //if player entered once and activated the puzzle
         if (_playerMov != null)
         {
-            //Dont set this to null since you're still tracking the player's speed.
-            _playerCharacterCtrl = null;
-            _playerMov = null;
             _playerVelocity = 0f;
             _playerInside = false;
-            //DisableEyes();
+            DisableEyes();
             Debug.Log("Player exited Eye perimeter");
         }
     }
@@ -188,6 +219,12 @@ public class StartAndStop : MonoBehaviour
             foreach (EyeHandler eye in _eyes)
                 eye.DisableEye();
 
+    }
+    //If player gets the thing
+    private void PlayerWins()
+    {
+        _playerCharacterCtrl = null;
+         _playerMov = null;
     }
 
 }
