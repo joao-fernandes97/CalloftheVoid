@@ -4,8 +4,13 @@ public class Portal : MonoBehaviour
 {
     [SerializeField]
     private PlanetsEnum planet;
+    [SerializeField]
+    private GameObject eclipseWall;
+    [SerializeField]
+    private GameObject marsWall;
 
     private Pedestal pedestal;
+
 
     private void Start()
     {
@@ -27,6 +32,8 @@ public class Portal : MonoBehaviour
     {
         this.planet = planet;
         pedestal.Planet = planet;
+        eclipseWall.GetComponent<EclipseWall>().ChangePortalActive(planet);
+        marsWall.GetComponent<EclipseWall>().ChangePortalActive(planet);
 
         for (int i = 0; i < transform.childCount; i++)
         {

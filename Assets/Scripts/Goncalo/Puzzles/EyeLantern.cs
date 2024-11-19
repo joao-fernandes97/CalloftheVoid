@@ -20,9 +20,10 @@ public class EyeLantern : MonoBehaviour
         //Checks for the lantern
         if (other.GetComponent<Lantern>() != null)
         {
+            Lantern lantern = other.GetComponent<Lantern>();
             Debug.Log("detected lantern");
             //If the lantern has Neptune's energy, the eye dies
-            if (other.GetComponent<Lantern>().Planet == PlanetsEnum.Neptune)
+            if (lantern.Planet == PlanetsEnum.Neptune && lantern.emitingEnergy)
             {
                 Debug.Log("detected neptune");
                 Destroy(gameObject);

@@ -18,6 +18,7 @@ public class Lantern : MonoBehaviour, IUsable
     private GameObject particles;
 
     private Collider energyCollider;
+    public bool emitingEnergy = false;
 
     public bool OnPlayer {  get; set; } = false;
 
@@ -44,7 +45,7 @@ public class Lantern : MonoBehaviour, IUsable
     {
         if (Input.GetMouseButtonUp(0))
         {
-            energyCollider.enabled = false;
+            emitingEnergy = false;
             particles.SetActive(false);
         }
     }
@@ -90,7 +91,7 @@ public class Lantern : MonoBehaviour, IUsable
 
     public void Use()
     {
-        energyCollider.enabled = true;
+        emitingEnergy = true;
         particles.SetActive(true);
     }
 }
