@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.6
+  m_FogDensity: 0.5
   m_LinearFogStart: 0
   m_LinearFogEnd: 4
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -263,7 +263,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 30
   Pan2D: 0
@@ -691,37 +691,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1 &408566233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 408566234}
-  m_Layer: 3
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &408566234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408566233}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 904057651}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &502428161 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3349907831144329240, guid: 685cf2aa4a15c4f48a7a0c4e5ce78033, type: 3}
@@ -806,10 +775,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1645050413403051840, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 2921061811376305970, guid: f1e695242836f44499c139415dc0067d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -858,43 +823,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 408566234}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: groundDistance
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: maxStrafeSpeed
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: maxForwardSpeed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: maxBackwardSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      propertyPath: groundLayerMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2921061811376305970, guid: f1e695242836f44499c139415dc0067d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 408566234}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e695242836f44499c139415dc0067d, type: 3}
---- !u!4 &904057651 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2921061811376305970, guid: f1e695242836f44499c139415dc0067d, type: 3}
-  m_PrefabInstance: {fileID: 904057649}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &997550625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2926555683797983870, guid: 685cf2aa4a15c4f48a7a0c4e5ce78033, type: 3}
@@ -1250,7 +1183,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 30
   Pan2D: 0
@@ -1781,7 +1714,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 30
   Pan2D: 0
