@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class NotebookInteractable : MonoBehaviour, IInteractable, IUsable
 {
+    
     [SerializeField]
     private GameObject notebookSlot;
     [SerializeField]
@@ -26,6 +27,7 @@ public class NotebookInteractable : MonoBehaviour, IInteractable, IUsable
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         transform.gameObject.layer = layerMask;
         playerInventory.NewItem(itemNumber);
+        
     }
 
     public void Use()
