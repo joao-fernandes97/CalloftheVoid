@@ -9179,7 +9179,7 @@ MonoBehaviour:
   _swapTimer: {fileID: 2091108648}
   _maxSpeedTolerance: 1
   _failureCountDownSpeed: 1
-  _failureCountDown: 1
+  _failureCountDown: 0.6
 --- !u!114 &2091108648
 MonoBehaviour:
   m_ObjectHideFlags: 0
