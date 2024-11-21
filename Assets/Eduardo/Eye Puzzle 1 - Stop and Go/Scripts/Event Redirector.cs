@@ -7,7 +7,7 @@ public class EventRedirector : MonoBehaviour
     [SerializeField]private EyeHandler _eyeHandler;
     private void Awake()
     {
-        _eyeFollow = GetComponentInChildren<EyeFollow>();
+        _eyeFollow = GetComponentInChildren<EyeFollow>(true);
         if (_eyeFollow != null) { Debug.Log("Event Redirector Linked"); }
         else { Debug.Log("Couldn't find script"); }
     }

@@ -20,9 +20,9 @@ public class EyeHandler : MonoBehaviour
     
     void Awake()
     {
-        _eyeFollowScript = GetComponentInChildren<EyeFollow>();
-        _weightedTransformsCopyScript = GetComponentInChildren<WeightedTransformCopy_v2>();
-        _eyeAnimator = GetComponentInChildren<Animator>();
+        _eyeFollowScript = GetComponentInChildren<EyeFollow>(true);
+        _weightedTransformsCopyScript = GetComponentInChildren<WeightedTransformCopy_v2>(true);
+        _eyeAnimator = GetComponentInChildren<Animator>(true);
 
         
         //Eyes off by default

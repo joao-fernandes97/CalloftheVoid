@@ -17,14 +17,17 @@ public class EyeFollow : MonoBehaviour
     
     public bool canBlink { get; set; } = true;
     private bool _openAnimationDone = false;
-
     private bool _openEyes = false;
+    //What is called everytime the eyes are opened from outside
+    private void Awake()
+    {
+        animator.Play("Default");
+    }
     private void OnEnable() 
     {
-        _openEyes = false;
         firstBlink = false;        
         blinkTracker = blinkInterval;
-        animator.Play("Default");
+        OpenEye();
         
     }
     

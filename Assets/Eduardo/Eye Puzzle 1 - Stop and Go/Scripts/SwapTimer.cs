@@ -74,4 +74,11 @@ public class SwapTimer : MonoBehaviour
         }
         
     }
+    public void StopTimer()
+    {
+        _On = false;
+        ResetTimer();
+        MyTurn = true;
+
+    } 
 }

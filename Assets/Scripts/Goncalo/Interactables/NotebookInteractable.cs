@@ -7,6 +7,7 @@ public class NotebookInteractable : MonoBehaviour, IInteractable, IUsable
     private GameObject notebookSlot;
     [SerializeField]
     private LayerMask layerMask;
+    [SerializeField] private StopAndGoPuzzle _game = null;
 
     [SerializeField]
     private int itemNumber;
@@ -27,9 +28,19 @@ public class NotebookInteractable : MonoBehaviour, IInteractable, IUsable
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         transform.gameObject.layer = layerMask;
         playerInventory.NewItem(itemNumber);
+        GameWin();
         
     }
+    private void GameWin()
+    {
+        if (_game != null)
+        {
+            _game.GameToggle();
+            Debug.Log("YOU WIN");
 
+        } 
+
+    }
     public void Use()
     {
         Debug.Log("Notebook used");
