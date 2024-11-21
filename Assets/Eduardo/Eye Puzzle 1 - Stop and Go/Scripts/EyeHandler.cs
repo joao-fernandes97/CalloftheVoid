@@ -13,8 +13,8 @@ public class EyeHandler : MonoBehaviour
      
     private void FixedUpdate() 
     {
-        if (_eyeFollowScript._canBlink != _blinks)
-        _eyeFollowScript._canBlink = _blinks;
+        if (_eyeFollowScript.canBlink != _blinks)
+        _eyeFollowScript.canBlink = _blinks;
 
     }
     
@@ -52,7 +52,7 @@ public class EyeHandler : MonoBehaviour
     }   
     IEnumerator CloseEyeAndDisableScript(float delay)
     {
-        
+
         _eyeFollowScript.CloseEye();
         yield return new WaitForSeconds(delay);       
         _eyeFollowScript.enabled = false;

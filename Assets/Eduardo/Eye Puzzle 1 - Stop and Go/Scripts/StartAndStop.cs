@@ -7,6 +7,7 @@ public class StartAndStop : MonoBehaviour
 {
     [Header("Eyes STOP AND GO")]
     [SerializeField] private EyeHandler[] _eyes;
+
     [Header ("Puzzle Params")]
     //At this speed, the fail timer starts counting down
     [SerializeField] private float _maxSpeedTolerance = 1f;

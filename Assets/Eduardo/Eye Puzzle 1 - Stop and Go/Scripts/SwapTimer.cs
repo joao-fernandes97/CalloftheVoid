@@ -12,18 +12,18 @@ public class SwapTimer : MonoBehaviour
     private float _timer;
     private bool _timerON = false;
     private bool _On = false;
-    public bool _myTurn = true;
-    private void Awake()
-    {
-        _timer = _onTime;        
-        _timerON = false;
-    }
+    public bool MyTurn { get; private set; } = true;
+    //private void Awake()
+    //{
+    //    _timer = _onTime;        
+    //    _timerON = false;
+    //}
     
     
-    private void ResetTimer()
+    public void ResetTimer()
     {
         _timerON = true;
-        if(_myTurn) 
+        if(MyTurn) 
         {
             if (_useRandom) _timer = _onTime + Random.Range(-randomOffset, randomOffset);
             else _timer = _onTime;
@@ -36,7 +36,7 @@ public class SwapTimer : MonoBehaviour
         }
         
     }
-    private void TimeStart()
+    public void TimeStart()
     {
         _On = true;
         _timerON = true;
@@ -50,7 +50,7 @@ public class SwapTimer : MonoBehaviour
         }
         else return false;
     }
-    private void Swap() => _myTurn = !_myTurn;
+    private void Swap() => MyTurn = !MyTurn;
     public void SwapTurns()
     {
        if (_timerON)
