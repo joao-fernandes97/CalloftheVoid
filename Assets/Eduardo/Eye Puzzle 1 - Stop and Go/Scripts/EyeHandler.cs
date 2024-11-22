@@ -13,16 +13,16 @@ public class EyeHandler : MonoBehaviour
      
     private void FixedUpdate() 
     {
-        if (_eyeFollowScript._canBlink != _blinks)
-        _eyeFollowScript._canBlink = _blinks;
+        if (_eyeFollowScript.canBlink != _blinks)
+        _eyeFollowScript.canBlink = _blinks;
 
     }
     
     void Awake()
     {
-        _eyeFollowScript = GetComponentInChildren<EyeFollow>();
-        _weightedTransformsCopyScript = GetComponentInChildren<WeightedTransformCopy_v2>();
-        _eyeAnimator = GetComponentInChildren<Animator>();
+        _eyeFollowScript = GetComponentInChildren<EyeFollow>(true);
+        _weightedTransformsCopyScript = GetComponentInChildren<WeightedTransformCopy_v2>(true);
+        _eyeAnimator = GetComponentInChildren<Animator>(true);
 
         
         //Eyes off by default
@@ -52,7 +52,7 @@ public class EyeHandler : MonoBehaviour
     }   
     IEnumerator CloseEyeAndDisableScript(float delay)
     {
-        
+
         _eyeFollowScript.CloseEye();
         yield return new WaitForSeconds(delay);       
         _eyeFollowScript.enabled = false;

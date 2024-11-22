@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,57 +13,49 @@ public class EyeFollow : MonoBehaviour
     [SerializeField] private Animator animator;    
     [SerializeField] private float blinkInterval = 1f;
     private float blinkTracker;
-    private bool firstBlink = false;
-    private bool active = false;
-    private bool _resetDone = false;
-   
-
-
-    //Separate behavior into:
-    //Follow
-    //Blinking and Opening
+    private bool firstBlink = false;   
     
-    public bool _canBlink { get; set; } = true;
+    public bool canBlink { get; set; } = true;
     private bool _openAnimationDone = false;
-
+    private bool _openEyes = false;
+    //What is called everytime the eyes are opened from outside
+    private void Awake()
+    {
+        animator.Play("Default");
+    }
     private void OnEnable() 
     {
-        firstBlink = false;
-        active = true;
+        firstBlink = false;        
         blinkTracker = blinkInterval;
-        animator.Play("Default");
+        OpenEye();
         
     }
-    private void Awake()    
-    {
-        firstBlink = false;
-        active = true;
-        blinkTracker = blinkInterval;
-        animator.Play("Default");
-    }   
-
+    
 
     void LateUpdate()
     {
         
-        if(active)
+        if(_openEyes)
         {
+            //Open eyes and follow target
             if (!firstBlink) EyeOpen();
-            else if ((firstBlink && _openAnimationDone) && _canBlink) BlinkRandom();
+            else if ((firstBlink && _openAnimationDone) && canBlink) BlinkRandom();
             FollowTargetLerped(player.position);
 
         }
         else
         {
-            ResetEye();          
-
+            //top following eye and reset
+            ResetEye();
         }
         
-        
     }
-
     
-
+    [Button]
+    public void OpenEye() => _openEyes = true;
+    [Button]
+    public void CloseEye() => _openEyes = false;
+    
     private Quaternion LookAtTarget(Vector3 target)
     {
         //Get direction first 
@@ -71,14 +64,7 @@ public class EyeFollow : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(direction.normalized,Vector3.up);
         return rot;
     }
-    // private bool FacingTarget(Vector3 target)
-    // {
-    //     Vector3 direction = (target - Origin.position).normalized;
-    //     if(Vector3.Dot(Origin.forward,direction)< .7f) return false; 
-    //     else return true;
-
-    // }
-    //public bool CheckIfAtRest() => FacingTarget(restPoint.position);
+    
     private void FollowTargetLerped(Vector3 target)
     {
         //Debug.Log($"Position is being tracked {target}.");
@@ -92,10 +78,7 @@ public class EyeFollow : MonoBehaviour
         animator.Play("Open");
         firstBlink = true;
     }
-    public void CloseEye()
-    {
-        active = false;
-    }
+    
 
     private void ResetEye()
     { 
@@ -103,6 +86,7 @@ public class EyeFollow : MonoBehaviour
         blinkTracker = blinkInterval;
         firstBlink = false;
         FollowTargetLerped(restPoint.position);
+       
     }
     private void BlinkRandom()
     {
