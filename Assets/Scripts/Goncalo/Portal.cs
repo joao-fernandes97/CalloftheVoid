@@ -1,3 +1,5 @@
+using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
@@ -9,31 +11,18 @@ public class Portal : MonoBehaviour
     [SerializeField]
     private GameObject marsWall;
 
-    private Pedestal pedestal;
-
-
-    private void Start()
-    {
-        pedestal = FindAnyObjectByType<Pedestal>();
-
-        if (pedestal == null)
-        {
-            Debug.Log("Portal couldn't find the pedestal");
-        }
-    }
+    public event Action<PlanetsEnum> PlanetChanged;
 
     /// <summary>
     /// A method to iterate through the planes of each planet, activating only the intended portal
-    /// Also sets the pedestal to the right planet
+    /// Also sets the pedestal and the walls to the right planet using an EVENT
     /// Disables all other portals
     /// </summary>
     /// <param name="planet"></param>
     public void ChangePlanet(PlanetsEnum planet)
     {
         this.planet = planet;
-        pedestal.Planet = planet;
-        eclipseWall.GetComponent<EclipseWall>().ChangePortalActive(planet);
-        marsWall.GetComponent<EclipseWall>().ChangePortalActive(planet);
+        OnPlanetsChanged(planet);
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -47,6 +36,18 @@ public class Portal : MonoBehaviour
             {
                 child.SetActive(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// Check if there are listeners before originating the event
+    /// </summary>
+    /// <param name="planet"></param>
+    protected virtual void OnPlanetsChanged(PlanetsEnum planet)
+    {
+        if (PlanetChanged != null)
+        {
+            PlanetChanged(planet);
         }
     }
 }

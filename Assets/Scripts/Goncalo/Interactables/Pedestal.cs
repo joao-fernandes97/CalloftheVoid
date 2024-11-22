@@ -12,11 +12,15 @@ public class Pedestal : MonoBehaviour, IInteractable
     private GameObject pedestalSpot;
     [SerializeField]
     private GameObject playerSpot;
-
+    [SerializeField]
+    private Portal portal;
     [SerializeField]
     private int itemNumber;
     private PlayerInventory playerInventory;
 
+
+
+    private bool hasLantern;
     private PlanetsEnum planet;
     public PlanetsEnum Planet
     {
@@ -34,8 +38,6 @@ public class Pedestal : MonoBehaviour, IInteractable
             }
         }
     }
-
-    private bool hasLantern;
 
     private void Start()
     {
@@ -88,5 +90,24 @@ public class Pedestal : MonoBehaviour, IInteractable
         interactedText.SetActive(true);
         yield return new WaitForSeconds(.5f);
         interactedText.SetActive(false);
+    }
+
+    /// <summary>
+    /// This method will get called through an event from the Portal class
+    /// </summary>
+    /// <param name="planet"></param>
+    private void PedestalPlanetChange(PlanetsEnum planet)
+    {
+        Planet = planet;
+    }
+
+    private void OnEnable()
+    {
+        portal.PlanetChanged += PedestalPlanetChange;
+    }
+
+    private void OnDisable()
+    {
+        portal.PlanetChanged -= PedestalPlanetChange;
     }
 }

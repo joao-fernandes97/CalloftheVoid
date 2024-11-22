@@ -4,24 +4,14 @@ public class EclipseWall : MonoBehaviour
 {
     [SerializeField]
     private GameObject wallModel;
-
+    [SerializeField]
+    private Portal portal;
     [SerializeField]
     private PlanetsEnum portalPlanet;
     private PlanetsEnum portalPlanetActive;
 
-    private PlanetsEnum lanternPlanetActive;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -52,6 +42,10 @@ public class EclipseWall : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method will get called through an event from the Portal class
+    /// </summary>
+    /// <param name="planet"></param>
     public void ChangePortalActive(PlanetsEnum activePortalPlanet)
     {
         portalPlanetActive = activePortalPlanet;
@@ -64,5 +58,15 @@ public class EclipseWall : MonoBehaviour
         {
             wallModel.SetActive(true);
         }
+    }
+
+    private void OnEnable()
+    {
+        portal.PlanetChanged += ChangePortalActive;
+    }
+
+    private void OnDisable()
+    {
+        portal.PlanetChanged -= ChangePortalActive;
     }
 }

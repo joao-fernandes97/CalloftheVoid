@@ -795,6 +795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallModel: {fileID: 445007243}
   portalPlanet: 4
+  portal: {fileID: 1636501172}
 --- !u!54 &366190183
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3150,6 +3151,7 @@ MonoBehaviour:
   pedestalSpot: {fileID: 1963836018}
   playerSpot: {fileID: 904057650}
   itemNumber: 1
+  portal: {fileID: 1636501172}
 --- !u!65 &970577163
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8781,7 +8783,7 @@ GameObject:
   - component: {fileID: 1558685260}
   - component: {fileID: 1558685259}
   - component: {fileID: 1558685258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10620,6 +10622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallModel: {fileID: 214501864}
   portalPlanet: 1
+  portal: {fileID: 1636501172}
 --- !u!65 &1963721066
 BoxCollider:
   m_ObjectHideFlags: 0
