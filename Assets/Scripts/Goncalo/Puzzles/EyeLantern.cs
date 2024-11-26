@@ -2,17 +2,8 @@ using UnityEngine;
 
 public class EyeLantern : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private PlanetsEnum necessaryEnergy;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,7 +14,7 @@ public class EyeLantern : MonoBehaviour
             Lantern lantern = other.GetComponent<Lantern>();
             Debug.Log("detected lantern");
             //If the lantern has Neptune's energy, the eye dies
-            if (lantern.Planet == PlanetsEnum.Neptune && lantern.emitingEnergy)
+            if (lantern.Planet == necessaryEnergy && lantern.emitingEnergy)
             {
                 Debug.Log("detected neptune");
                 Destroy(gameObject);

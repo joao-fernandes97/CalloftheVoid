@@ -24,7 +24,6 @@ public class StopAndGoPuzzle : MonoBehaviour
     [SerializeField] private float _failureCountDown = 10f;
     private float _failureCountDownMax;
     private float _playerVelocity;
-    private bool _playerPlaying = false;
     private bool _playerFailed = false;
     private bool gameActive = true;
  

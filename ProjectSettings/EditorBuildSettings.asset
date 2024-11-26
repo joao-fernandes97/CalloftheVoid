@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototypes/Sound.unity
-    guid: f4e1bb009c88970408cba3e31a290801
+    path: Assets/Scenes/Prototypes/Main.unity
+    guid: 1c8c111996899724dbfdd7924d2be0f2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

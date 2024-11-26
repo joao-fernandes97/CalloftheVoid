@@ -15,6 +15,8 @@ public class Lantern : MonoBehaviour, IUsable
     [SerializeField]
     private Material neptune;
     [SerializeField]
+    private GameObject lanternLight;
+    [SerializeField]
     private GameObject particles;
 
     private Collider energyCollider;
@@ -56,7 +58,7 @@ public class Lantern : MonoBehaviour, IUsable
     /// <param name="planet"></param>
     private void SetEnergy(PlanetsEnum planet)
     {
-        Renderer renderer = GetComponent<Renderer>();
+        Renderer renderer = lanternLight.GetComponent<Renderer>();
         ParticleSystem.MainModule main = particles.GetComponent<ParticleSystem>().main;
         switch (planet)
         {
