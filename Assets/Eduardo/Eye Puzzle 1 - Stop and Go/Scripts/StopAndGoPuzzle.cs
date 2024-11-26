@@ -39,7 +39,7 @@ public class StopAndGoPuzzle : MonoBehaviour
     private bool _eyesOpenFlag = false;
 
     
-    private void Awake()
+    private void Start()
     {
         _failureCountDownMax = _failureCountDown;
         _playerMov = _player.GetComponent<PlayerMovement>();
@@ -136,10 +136,10 @@ public class StopAndGoPuzzle : MonoBehaviour
             if (!_eyesOpenFlag)
             {
                 EnableEyes();
-                Debug.Log("Eyes where open");
+                //Debug.Log("Eyes where open");
                 _eyesOpenFlag = true;
             }
-            Debug.Log("My turn");
+            //Debug.Log("My turn");
             //Tracking and counting behavior (game on)
             if (_failureCountDown <= 0.0f) _playerFailed = true;
             if (_playerVelocity >= _maxSpeedTolerance)
@@ -163,11 +163,11 @@ public class StopAndGoPuzzle : MonoBehaviour
         else
         {
             vol.weight = 0;
-            Debug.Log("His turn");
+            //Debug.Log("His turn");
             if (_eyesOpenFlag)
             {
                 DisableEyes();
-                Debug.Log("Eyes where closed");
+                //Debug.Log("Eyes where closed");
                 _eyesOpenFlag = false;
                 _failureCountDown = _failureCountDownMax;
 
@@ -187,7 +187,7 @@ public class StopAndGoPuzzle : MonoBehaviour
    
     private void CountToFailure()
     {
-         Debug.Log($"CountToFailure {_failureCountDown}");
+         //Debug.Log($"CountToFailure {_failureCountDown}");
         if (_failureCountDown > 0.0f)
             _failureCountDown -= _failureCountDownSpeed * Time.fixedDeltaTime;
 
@@ -209,7 +209,7 @@ public class StopAndGoPuzzle : MonoBehaviour
         if (_playerMov != null)
         {
             _playerInside = true;
-            Debug.Log("Player entered Eye perimeter");
+            //Debug.Log("Player entered Eye perimeter");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -218,7 +218,7 @@ public class StopAndGoPuzzle : MonoBehaviour
         if (_playerMov != null)
         {
             _playerInside = false;
-            Debug.Log("Player exited Eye perimeter");
+            //Debug.Log("Player exited Eye perimeter");
         }
     }
 

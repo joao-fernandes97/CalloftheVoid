@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 198623165}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 2006946870}
   minDistance: 2
   RotationSpeed: 5
@@ -4878,7 +4878,7 @@ MonoBehaviour:
   - {fileID: 877896270}
   - {fileID: 819080389}
   _doorAnimCtrl: {fileID: 499945978}
-  _player: {fileID: 0}
+  _player: {fileID: 1495948854}
   vol: {fileID: 1551534328}
   _expel: {fileID: 553583808}
   _swapTimer: {fileID: 553583807}
@@ -4924,7 +4924,7 @@ Transform:
   m_GameObject: {fileID: 553583805}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.8440956, z: -0, w: 0.5361927}
-  m_LocalPosition: {x: -18.25, y: 4.17, z: -6.92}
+  m_LocalPosition: {x: -18.25, y: 3.71, z: -6.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5239,7 +5239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 1344305718}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1655848681}
   minDistance: 2
   RotationSpeed: 5
@@ -5593,7 +5593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 485159869}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1501411541}
   minDistance: 2
   RotationSpeed: 5
@@ -6759,7 +6759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 337033816}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 3456962}
   minDistance: 2
   RotationSpeed: 5
@@ -8645,7 +8645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 1694240884}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1285738023}
   minDistance: 2
   RotationSpeed: 5
@@ -10133,7 +10133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 483997767}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 356114536}
   minDistance: 2
   RotationSpeed: 5
@@ -12161,7 +12161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 372592362}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1060066554}
   minDistance: 2
   RotationSpeed: 5
@@ -13226,6 +13226,16 @@ Transform:
   - {fileID: 1511002887}
   m_Father: {fileID: 325094442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1495948854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5065501675805127916, guid: f1e695242836f44499c139415dc0067d, type: 3}
+  m_PrefabInstance: {fileID: 904057649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1495948858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2921061811376305970, guid: f1e695242836f44499c139415dc0067d, type: 3}
+  m_PrefabInstance: {fileID: 904057649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1498499103
 GameObject:
   m_ObjectHideFlags: 0
@@ -13804,7 +13814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 465955944}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 2089248646}
   minDistance: 2
   RotationSpeed: 5
@@ -16549,7 +16559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 909903346}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1405180366}
   minDistance: 2
   RotationSpeed: 5
@@ -23385,7 +23395,7 @@ Transform:
   m_GameObject: {fileID: 2109914244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.21772137, z: -0, w: 0.976011}
-  m_LocalPosition: {x: -17.905218, y: 5.337194, z: -7.4374237}
+  m_LocalPosition: {x: -17.905218, y: 4.877194, z: -7.4374237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23448,7 +23458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Origin: {fileID: 1618474625}
-  player: {fileID: 0}
+  player: {fileID: 1495948858}
   restPoint: {fileID: 1502148323}
   minDistance: 2
   RotationSpeed: 5

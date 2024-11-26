@@ -8,8 +8,8 @@ public class EventRedirector : MonoBehaviour
     private void Awake()
     {
         _eyeFollow = GetComponentInChildren<EyeFollow>(true);
-        if (_eyeFollow != null) { Debug.Log("Event Redirector Linked"); }
-        else { Debug.Log("Couldn't find script"); }
+        //if (_eyeFollow != null) { Debug.Log("Event Redirector Linked"); }
+        //else { Debug.Log("Couldn't find script"); }
     }
     public void OpenStart() => _eyeFollow.EyeIsOpening();
     
