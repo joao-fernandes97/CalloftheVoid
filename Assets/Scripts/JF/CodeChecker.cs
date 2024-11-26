@@ -13,14 +13,14 @@ public class CodeChecker : MonoBehaviour
     [SerializeField]
     private TMP_Text CodePrompt;
     private int currentLock = 1;
-    private char[] firstCode = new char[4] {'M','L','K','Y'};
-    private char[] secondCode = new char[4] {'S','T','A','R'};
-    private char[] thirdCode = new char[4] {'N','E','P','T'};
+    private char[] firstCode = new char[3] {'A','I','Q'};
+    private char[] secondCode = new char[3] {'X','A','D'};
+    private char[] thirdCode = new char[3] {'Q','D','I'};
     private char[] currentCode;
     private GameObject currentButton;
     private CinemachineCamera UICamera;
 
-    private char[] enteredCode = new char[4] {'A','A','A','A'};
+    private char[] enteredCode = new char[3] {'A','A','A'};
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -80,8 +80,8 @@ public class CodeChecker : MonoBehaviour
 
     private void ValidateCode()
     {
-        Debug.Log($"{enteredCode[0]},{enteredCode[1]},{enteredCode[2]},{enteredCode[3]}");
-        Debug.Log($"{currentCode[0]},{currentCode[1]},{currentCode[2]},{currentCode[3]}");
+        Debug.Log($"{enteredCode[0]},{enteredCode[1]},{enteredCode[2]}");
+        Debug.Log($"{currentCode[0]},{currentCode[1]},{currentCode[2]}");
         if(enteredCode.SequenceEqual(currentCode))
         {
             Debug.Log("Correct");
