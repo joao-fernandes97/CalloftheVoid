@@ -6,10 +6,6 @@ public class Portal : MonoBehaviour
 {
     [SerializeField]
     private PlanetsEnum planet;
-    [SerializeField]
-    private GameObject eclipseWall;
-    [SerializeField]
-    private GameObject marsWall;
 
     public event Action<PlanetsEnum> PlanetChanged;
 
