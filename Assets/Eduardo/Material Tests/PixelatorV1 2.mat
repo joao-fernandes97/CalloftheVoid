@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PixelatorV1
+  m_Name: PixelatorV1 2
   m_Shader: {fileID: -6465566751694194690, guid: 152d91b8f5d966a48a00a01339fb14e3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,11 +54,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Colour_Limiter: 85.4
+    - _Colour_Limiter: 91.1
     - _Emissive_Strenght: 0
     - _Limit_Colours: 1
     - _Metalic: 0
-    - _Pixel_Scale: 8
+    - _Pixel_Scale: 65
     - _Pixelate: 1
     - _QueueControl: 0
     - _QueueOffset: 0
