@@ -11,8 +11,6 @@ public class EclipseWall : MonoBehaviour
     private PlanetsEnum portalPlanetActive;
 
 
-
-
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("detected something");
