@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Pauses the game, disabling camera movement and enabling the cursor
         if (Input.GetKeyDown(KeyCode.P) && !gamePaused)
         {
             Time.timeScale = 0f;
@@ -29,6 +30,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets everything back to normal
+    /// </summary>
     public void Resume()
     {
         pausePanel.SetActive(false);
