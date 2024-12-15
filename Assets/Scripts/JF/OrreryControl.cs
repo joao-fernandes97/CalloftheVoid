@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class OrreryControl : MonoBehaviour
     private Button buttonConfirm;
 
     private int activePlanetOrbitIndex;
+    private bool isRotating;
     
 
     private void Start()
@@ -53,17 +55,40 @@ public class OrreryControl : MonoBehaviour
     }
 
     public void RotateRight(){
-        planetOrbits[activePlanetOrbitIndex].Rotate(0.0f,45.0f,0.0f);
-        Debug.Log("RotateRight");
+        if(!isRotating){
+            StartCoroutine(RotateSmooth(planetOrbits[activePlanetOrbitIndex],45.0f,1.0f));
+            Debug.Log("RotateRight");
+        }
     }
 
     public void RotateLeft(){
-        planetOrbits[activePlanetOrbitIndex].Rotate(0.0f,-45.0f,0.0f);
-        Debug.Log("RotateLeft");
+        if(!isRotating){
+            StartCoroutine(RotateSmooth(planetOrbits[activePlanetOrbitIndex],-45.0f,1.0f));
+            Debug.Log("RotateLeft");
+        }
     }
 
     public void Confirm(){
         UICamera.Priority = 1;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    //rotationCoroutine
+    private IEnumerator RotateSmooth(Transform target, float angle, float duration)
+    {
+        isRotating = true;
+        Quaternion initialRotation = target.rotation;
+        Quaternion targetRotation = initialRotation * Quaternion.Euler(0f,angle,0f);
+        float timeElapsed = 0f;
+
+        while (timeElapsed < duration)
+        {
+            target.rotation = Quaternion.Slerp(initialRotation, targetRotation, timeElapsed/duration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        target.rotation = targetRotation;
+        isRotating = false;
     }
 }
