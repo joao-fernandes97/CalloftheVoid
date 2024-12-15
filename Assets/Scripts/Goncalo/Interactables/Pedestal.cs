@@ -5,8 +5,6 @@ using static UnityEngine.Rendering.DebugUI;
 public class Pedestal : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    private GameObject interactedText;
-    [SerializeField]
     private GameObject lantern;
     [SerializeField]
     private GameObject pedestalSpot;
@@ -79,17 +77,6 @@ public class Pedestal : MonoBehaviour, IInteractable
             //sets the lantern's energy when the player puts it on the pedestal
             lantern.GetComponent<Lantern>().Planet = Planet;
         }
-
-        StartCoroutine(InteractedCoroutine());
-    }
-
-    private IEnumerator InteractedCoroutine()
-    {
-        //Activates a text indicating that the cube was interacted with
-        //Changes which portal is active
-        interactedText.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        interactedText.SetActive(false);
     }
 
     /// <summary>

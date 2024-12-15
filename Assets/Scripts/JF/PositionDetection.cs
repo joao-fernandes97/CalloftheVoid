@@ -6,6 +6,8 @@ using UnityEngine;
 public class PositionDetection : MonoBehaviour
 {
     [SerializeField]
+    private GameObject finalMachine;
+    [SerializeField]
     private TMP_Text PortalCode;
     [SerializeField]
     private Collider Mars;
@@ -50,6 +52,7 @@ public class PositionDetection : MonoBehaviour
         }else if(collider == Neptune)
         {
             portal.ChangePlanet(PlanetsEnum.Neptune);
+            finalMachine.SetActive(true);
             PortalCode.text="XAD - QDI";
         }else
         {

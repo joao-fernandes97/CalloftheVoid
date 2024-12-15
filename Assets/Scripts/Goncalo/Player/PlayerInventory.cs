@@ -67,9 +67,5 @@ public class PlayerInventory : MonoBehaviour
         {
             NewItem(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && inventorySlots[2].transform.childCount > 0)
-        {
-            NewItem(2);
-        }
     }
 }

@@ -8,7 +8,7 @@ public class CreatureBehaviour : MonoBehaviour, IInteractable
     [SerializeField]
     private LayerMask defaultMask;
     [SerializeField]
-    private LayerMask InteractableMask;
+    private LayerMask interactableMask;
     [SerializeField]
     private int creatureNumber;
     [SerializeField]
@@ -26,7 +26,7 @@ public class CreatureBehaviour : MonoBehaviour, IInteractable
     private void Start()
     {
         defaultMaskBit = (int)Mathf.Log(defaultMask.value, 2);
-        interactableMaskBit = (int)Mathf.Log(InteractableMask.value, 2);
+        interactableMaskBit = (int)Mathf.Log(interactableMask.value, 2);
     }
 
     public void Interact()
@@ -42,7 +42,6 @@ public class CreatureBehaviour : MonoBehaviour, IInteractable
         if (other.GetComponent<Lantern>() != null)
         {
             Lantern lantern = other.GetComponent<Lantern>();
-            //If the lantern has Neptune's energy, the eye dies
             if (lantern.Planet == planetEnergy && lantern.emitingEnergy && lantern.Planet == planetEnergy)
             {
                 model.SetActive(true);

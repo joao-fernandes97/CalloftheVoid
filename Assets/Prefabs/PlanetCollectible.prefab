@@ -121,3 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a740475ececfdd4ca98e36d39cc66c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 0
+  planetsEnum: 0
+  playerSpot: {fileID: 0}
+  playerInventory: {fileID: 0}
+  itemNumber: 0
+  cameraCenter: {fileID: 0}

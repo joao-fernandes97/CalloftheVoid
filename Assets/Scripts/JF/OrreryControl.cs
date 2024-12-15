@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,15 @@ using UnityEngine.UI;
 public class OrreryControl : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] planetOrbits;
+    private Transform jupiterTransform;
+    [SerializeField]
+    private Transform saturnTransform;
+    [SerializeField]
+    private Transform neptuneTransform;
+    //[SerializeField]
+    //private Transform[] planetOrbits;
+    [SerializeField]
+    private List<Transform> planetOrbits;
     [SerializeField]
     private CinemachineCamera UICamera;
     [SerializeField]
@@ -45,12 +54,14 @@ public class OrreryControl : MonoBehaviour
     }
     
     public void SelectOuter(){
-        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex+1,0,planetOrbits.Length-1);
+        //activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex+1,0,planetOrbits.Length-1);
+        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex + 1, 0, planetOrbits.Count - 1);
         Debug.Log($"SelectOuter: {activePlanetOrbitIndex}");
     }
 
     public void SelectInner(){
-        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex-1,0,planetOrbits.Length-1);
+        //activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex-1,0,planetOrbits.Length-1);
+        activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex - 1, 0, planetOrbits.Count - 1);
         Debug.Log($"SelectInner: {activePlanetOrbitIndex}");
     }
 
@@ -72,6 +83,25 @@ public class OrreryControl : MonoBehaviour
         UICamera.Priority = 1;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public void InsertPlanet(PlanetsEnum planet)
+    {
+        switch (planet)
+        {
+            case PlanetsEnum.Jupiter:
+                jupiterTransform.gameObject.SetActive(true);
+                planetOrbits.Add(jupiterTransform);
+                return;
+            case PlanetsEnum.Saturn:
+                saturnTransform.gameObject.SetActive(true);
+                planetOrbits.Add(saturnTransform);
+                return;
+            case PlanetsEnum.Neptune:
+                neptuneTransform.gameObject.SetActive(true);
+                planetOrbits.Add(neptuneTransform);
+                return;
+        }
+}
 
     //rotationCoroutine
     private IEnumerator RotateSmooth(Transform target, float angle, float duration)
