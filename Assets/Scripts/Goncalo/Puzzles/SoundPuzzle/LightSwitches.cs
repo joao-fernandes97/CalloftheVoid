@@ -4,6 +4,8 @@ using UnityEngine;
 public class LightSwitches : MonoBehaviour, IInteractable
 {
     [SerializeField]
+    private LayerMask defaultMask;
+    [SerializeField]
     private int switchNumber = 0;
     [SerializeField]
     private bool finalSwitch = false;
@@ -63,6 +65,7 @@ public class LightSwitches : MonoBehaviour, IInteractable
             beeping = false;
             audioSource.Stop();
             soundPuzzle.SwitchActivated(switchNumber, finalSwitch);
+            gameObject.layer = (int)Mathf.Log(defaultMask.value, 2);
         }
     }
 

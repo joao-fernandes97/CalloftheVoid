@@ -7,6 +7,16 @@ using UnityEngine.UI;
 
 public class OrreryControl : MonoBehaviour
 {
+    [Header("Layers")]
+    [SerializeField]
+    private LayerMask planetsMask;
+    [SerializeField]
+    private LayerMask outlineMask;
+
+    private int planetsMaskBit;
+    private int outlineMaskBit;
+
+    [Header("Transforms")]
     [SerializeField]
     private Transform jupiterTransform;
     [SerializeField]
@@ -30,6 +40,7 @@ public class OrreryControl : MonoBehaviour
     [SerializeField]
     private Button buttonConfirm;
 
+    private InteractablePanel interactablePanel;
     private int activePlanetOrbitIndex;
     private bool isRotating;
     
@@ -42,6 +53,10 @@ public class OrreryControl : MonoBehaviour
         buttonOuter.onClick.AddListener(SelectOuter);
         buttonInner.onClick.AddListener(SelectInner);
         buttonConfirm.onClick.AddListener(Confirm);
+
+        planetsMaskBit = (int)Mathf.Log(planetsMask.value, 2);
+        outlineMaskBit = (int)Mathf.Log(outlineMask.value, 2);
+        interactablePanel = GetComponent<InteractablePanel>();
     }
 
     private void OnDestroy()
@@ -53,16 +68,37 @@ public class OrreryControl : MonoBehaviour
         buttonConfirm.onClick.RemoveListener(Confirm);
     }
     
+    /// <summary>
+    /// Select an outer planet if possible and adds an outline to the selected planet
+    /// </summary>
     public void SelectOuter(){
         //activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex+1,0,planetOrbits.Length-1);
         activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex + 1, 0, planetOrbits.Count - 1);
         Debug.Log($"SelectOuter: {activePlanetOrbitIndex}");
+        ResetLayers();
+        planetOrbits[activePlanetOrbitIndex].transform.GetChild(0).gameObject.layer = outlineMaskBit;
     }
 
+    /// <summary>
+    /// Select an inner planet if possible and adds an outline to the selected planet
+    /// </summary>
     public void SelectInner(){
         //activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex-1,0,planetOrbits.Length-1);
         activePlanetOrbitIndex = Math.Clamp(activePlanetOrbitIndex - 1, 0, planetOrbits.Count - 1);
         Debug.Log($"SelectInner: {activePlanetOrbitIndex}");
+        ResetLayers();
+        planetOrbits[activePlanetOrbitIndex].transform.GetChild(0).gameObject.layer = outlineMaskBit;
+    }
+
+    /// <summary>
+    /// Resets the planets layers to remove the outlines
+    /// </summary>
+    private void ResetLayers()
+    {
+        foreach (Transform transform in planetOrbits)
+        {
+            transform.GetChild(0).gameObject.layer = planetsMaskBit;
+        }
     }
 
     public void RotateRight(){
@@ -79,11 +115,20 @@ public class OrreryControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that is called when exiting the panel
+    /// </summary>
     public void Confirm(){
-        UICamera.Priority = 1;
-        Cursor.lockState = CursorLockMode.Locked;
+        ResetLayers();
+        interactablePanel.ExitInteraction();
     }
 
+
+    /// <summary>
+    /// Adds the inserted planet to the possible planet selection
+    /// Activates the planet's representation on the orrery
+    /// </summary>
+    /// <param name="planet"></param>
     public void InsertPlanet(PlanetsEnum planet)
     {
         switch (planet)
@@ -101,7 +146,17 @@ public class OrreryControl : MonoBehaviour
                 planetOrbits.Add(neptuneTransform);
                 return;
         }
-}
+    }
+
+    /// <summary>
+    /// Resets all planets' layers to remove the outline
+    /// Sets the outline to the currently selected planet
+    /// </summary>
+    public void StartInteraction()
+    {
+        ResetLayers();
+        planetOrbits[activePlanetOrbitIndex].transform.GetChild(0).gameObject.layer = outlineMaskBit;
+    }
 
     //rotationCoroutine
     private IEnumerator RotateSmooth(Transform target, float angle, float duration)

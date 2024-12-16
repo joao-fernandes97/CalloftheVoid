@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.5
+  m_FogDensity: 0.45
   m_LinearFogStart: 0
   m_LinearFogEnd: 4
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -316,6 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3530eaa814eaf64a942077d2f0293da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 1
   switchNumber: 0
   finalSwitch: 0
 --- !u!82 &5879985
@@ -1144,7 +1147,7 @@ GameObject:
   - component: {fileID: 58669678}
   - component: {fileID: 58669677}
   - component: {fileID: 58669679}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Select Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2205,7 +2208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186278380}
   - component: {fileID: 186278379}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: UI Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2850,7 +2853,7 @@ GameObject:
   - component: {fileID: 244505020}
   - component: {fileID: 244505022}
   - component: {fileID: 244505021}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4263,7 +4266,7 @@ GameObject:
   - component: {fileID: 425683119}
   - component: {fileID: 425683118}
   - component: {fileID: 425683117}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8738,7 +8741,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8abab178abd1434b813259af139f4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 1
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 64
   UICamera: {fileID: 186278379}
+  cameraPriority: 11
+  cameraPriorityReset: 1
+  playerMovement: {fileID: 1495948860}
+  playerInteraction: {fileID: 1567248905}
 --- !u!114 &895915094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8751,6 +8764,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1412928a12ccd646840ecb5ee89faec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetsMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  outlineMask:
+    serializedVersion: 2
+    m_Bits: 2048
   jupiterTransform: {fileID: 1860702641}
   saturnTransform: {fileID: 771769566}
   neptuneTransform: {fileID: 1569751537}
@@ -8781,8 +8800,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.87, y: 5.95, z: 1.68}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.55, z: 1}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &900739596
 GameObject:
   m_ObjectHideFlags: 0
@@ -9500,7 +9519,7 @@ GameObject:
   - component: {fileID: 961156880}
   - component: {fileID: 961156879}
   - component: {fileID: 961156881}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rotate Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10088,7 +10107,7 @@ GameObject:
   - component: {fileID: 1064383946}
   - component: {fileID: 1064383948}
   - component: {fileID: 1064383947}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10699,7 +10718,7 @@ GameObject:
   - component: {fileID: 1103013212}
   - component: {fileID: 1103013214}
   - component: {fileID: 1103013213}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10838,7 +10857,7 @@ GameObject:
   - component: {fileID: 1118681696}
   - component: {fileID: 1118681695}
   - component: {fileID: 1118681694}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: UI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12021,7 +12040,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8abab178abd1434b813259af139f4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 0
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 0
   UICamera: {fileID: 1392832430}
+  cameraPriority: 11
+  cameraPriorityReset: 1
+  playerMovement: {fileID: 0}
+  playerInteraction: {fileID: 0}
 --- !u!65 &1252320406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13173,6 +13202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3530eaa814eaf64a942077d2f0293da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 1
   switchNumber: 2
   finalSwitch: 1
 --- !u!65 &1368587250
@@ -13278,7 +13310,7 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: 15a9841d205077e459aa1c14494a9f13, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
-  m_Pitch: 1
+  m_Pitch: 0.6
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -14404,7 +14436,7 @@ GameObject:
   - component: {fileID: 1432169953}
   - component: {fileID: 1432169955}
   - component: {fileID: 1432169954}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14846,7 +14878,7 @@ GameObject:
   - component: {fileID: 1449832280}
   - component: {fileID: 1449832279}
   - component: {fileID: 1449832281}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Select Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16266,6 +16298,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3199421528896027224, guid: f1e695242836f44499c139415dc0067d, type: 3}
   m_PrefabInstance: {fileID: 904057649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1567248905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4190091898974947463, guid: f1e695242836f44499c139415dc0067d, type: 3}
+  m_PrefabInstance: {fileID: 904057649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567248904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc53ee3803eddca4db6fdd323d9263bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1569751536
 GameObject:
   m_ObjectHideFlags: 0
@@ -16676,7 +16719,7 @@ GameObject:
   - component: {fileID: 1636246784}
   - component: {fileID: 1636246786}
   - component: {fileID: 1636246785}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16894,6 +16937,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3530eaa814eaf64a942077d2f0293da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 1
   switchNumber: 1
   finalSwitch: 0
 --- !u!65 &1680118086
@@ -16999,7 +17045,7 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: 15a9841d205077e459aa1c14494a9f13, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
-  m_Pitch: 1
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -19318,7 +19364,7 @@ GameObject:
   - component: {fileID: 1950619235}
   - component: {fileID: 1950619234}
   - component: {fileID: 1950619236}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rotate Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
