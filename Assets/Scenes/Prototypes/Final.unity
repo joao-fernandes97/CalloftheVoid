@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 48997967}
   - component: {fileID: 48997966}
   m_Layer: 6
-  m_Name: Sphere
+  m_Name: YellowPostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2498,7 +2498,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 50bfb2e15cc877244ad829af461d74dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2537,7 +2537,7 @@ Transform:
   m_GameObject: {fileID: 212551564}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 10, y: 5.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4763,7 +4763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &441073819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5459,8 +5459,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallModel: {fileID: 1403304907}
+  jupiterSymbol: {fileID: 227946238}
+  saturnSymbol: {fileID: 227946238}
   portal: {fileID: 1406807098}
   portalPlanet: 1
+  timeToDisappear: 0.5
 --- !u!65 &524990867
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7252,7 +7255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &771769566
 Transform:
   m_ObjectHideFlags: 0
@@ -8036,8 +8039,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallModel: {fileID: 212551564}
+  jupiterSymbol: {fileID: 1984369819}
+  saturnSymbol: {fileID: 878559123}
   portal: {fileID: 1406807098}
   portalPlanet: 4
+  timeToDisappear: 0.5
 --- !u!65 &857584103
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8670,7 +8676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 00c52a036ef432c4a89af001d837eb17, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489159159464621496, guid: 00c52a036ef432c4a89af001d837eb17, type: 3}
       propertyPath: m_LocalScale.x
@@ -8785,6 +8791,8 @@ MonoBehaviour:
   neptuneTransform: {fileID: 1569751537}
   planetOrbits:
   - {fileID: 894970151}
+  - {fileID: 1860702641}
+  - {fileID: 771769566}
   UICamera: {fileID: 186278379}
   buttonLeft: {fileID: 1950619236}
   buttonRight: {fileID: 961156881}
@@ -13835,7 +13843,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 50bfb2e15cc877244ad829af461d74dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13941,7 +13949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7afc4943f8506c42b5503cb1113d031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: 0
+  planet: 4
 --- !u!4 &1406807099
 Transform:
   m_ObjectHideFlags: 0
@@ -15705,7 +15713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1540849856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18702,7 +18710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1851775678
 Transform:
   m_ObjectHideFlags: 0
@@ -18739,7 +18747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1860702641
 Transform:
   m_ObjectHideFlags: 0
@@ -26465,7 +26473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109914245}
   m_Layer: 0
-  m_Name: Structure
+  m_Name: FleshWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27145,21 +27153,21 @@ SceneRoots:
   - {fileID: 1300720952}
   - {fileID: 1598041140}
   - {fileID: 174410949}
+  - {fileID: 553583809}
+  - {fileID: 1551534330}
   - {fileID: 886074614}
+  - {fileID: 48997970}
+  - {fileID: 2109914245}
   - {fileID: 1851775678}
   - {fileID: 895915090}
   - {fileID: 441073822}
-  - {fileID: 1252320409}
-  - {fileID: 553583809}
-  - {fileID: 1551534330}
-  - {fileID: 48997970}
-  - {fileID: 2109914245}
-  - {fileID: 1073728750}
   - {fileID: 1540849858}
+  - {fileID: 1252320409}
+  - {fileID: 1073728750}
+  - {fileID: 1433494451}
   - {fileID: 715943392}
   - {fileID: 616477}
   - {fileID: 391957195}
-  - {fileID: 1433494451}
   - {fileID: 3724273246335645659}
   - {fileID: 1634426946}
   - {fileID: 1992005722}
