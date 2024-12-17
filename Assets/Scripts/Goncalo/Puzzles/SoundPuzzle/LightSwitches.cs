@@ -9,6 +9,8 @@ public class LightSwitches : MonoBehaviour, IInteractable
     private int switchNumber = 0;
     [SerializeField]
     private bool finalSwitch = false;
+    [SerializeField]
+    private AudioClip wrongSwitchSound;
 
     private bool activated = false;
     private bool beeping = false;
@@ -18,6 +20,7 @@ public class LightSwitches : MonoBehaviour, IInteractable
     private Transform player;
     private AudioSource audioSource;
     private SoundPuzzle soundPuzzle;
+    private bool wrongSoundPlaying = false;
 
 
     private void Start()
@@ -59,6 +62,7 @@ public class LightSwitches : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        //If the switch is emiting sound the switch becomes activated, stopping the sound and progressing the puzzle
         if (beeping && !activated)
         {
             activated = true;
@@ -66,6 +70,12 @@ public class LightSwitches : MonoBehaviour, IInteractable
             audioSource.Stop();
             soundPuzzle.SwitchActivated(switchNumber, finalSwitch);
             gameObject.layer = (int)Mathf.Log(defaultMask.value, 2);
+        }
+        //if its not the correct switch and its not playing the wrong switch sound, plays it
+        else if (!wrongSoundPlaying)
+        {
+            audioSource.PlayOneShot(wrongSwitchSound);
+            StartCoroutine(WrongSoundPlayingCoroutine());
         }
     }
 
@@ -78,5 +88,16 @@ public class LightSwitches : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(beepDistanceInterval);
         canBeep = true;
+    }
+
+    /// <summary>
+    /// Coroutine to prevent the player from spamming the wrong switch sound
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator WrongSoundPlayingCoroutine()
+    {
+        wrongSoundPlaying = true;
+        yield return new WaitForSeconds(wrongSwitchSound.length);
+        wrongSoundPlaying = false;
     }
 }

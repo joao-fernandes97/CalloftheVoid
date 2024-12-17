@@ -4,6 +4,12 @@ public class SoundPuzzle : MonoBehaviour
 {
     [SerializeField]
     private int startingSwitch = 0;
+    [SerializeField]
+    private GameManager gameManager;
+
+    //Remove this after TP2
+    /*[SerializeField]
+    private GameObject endPanel;*/
 
     private int numOfSwitches = 0;
 
@@ -31,5 +37,9 @@ public class SoundPuzzle : MonoBehaviour
     {
         Debug.Log("You did it!");
         RenderSettings.fog = false;
+        //Remove this after TP2
+        /*endPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;*/
+        gameManager.SoundPuzzleFinished();
     }
 }

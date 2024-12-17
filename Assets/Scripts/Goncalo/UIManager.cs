@@ -17,14 +17,14 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         //Pauses the game, disabling camera movement and enabling the cursor
-        if (Input.GetKeyDown(KeyCode.P) && !gamePaused)
+        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && !gamePaused)
         {
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             playerMovement.enabled = false;
         }
-        else if (Input.GetKeyDown(KeyCode.P) && gamePaused)
+        else if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && gamePaused)
         {
             Resume();
         }
