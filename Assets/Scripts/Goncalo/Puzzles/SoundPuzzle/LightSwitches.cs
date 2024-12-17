@@ -11,6 +11,10 @@ public class LightSwitches : MonoBehaviour, IInteractable
     private bool finalSwitch = false;
     [SerializeField]
     private AudioClip wrongSwitchSound;
+    [SerializeField]
+    private GameObject sonarParticles;
+    [SerializeField]
+    private bool sonarActive = false;
 
     private bool activated = false;
     private bool beeping = false;
@@ -57,6 +61,12 @@ public class LightSwitches : MonoBehaviour, IInteractable
             canBeep = false;
             audioSource.Play();
             StartCoroutine(BeepIntervalCoroutine());
+            if (sonarActive)
+            {
+                GameObject sonarObject = Instantiate(sonarParticles, transform.position, Quaternion.identity);
+                float timeToDie = sonarObject.GetComponentInChildren<ParticleSystem>().main.startLifetime.constant;
+                Destroy(sonarObject, timeToDie);
+            }
         }
     }
 
