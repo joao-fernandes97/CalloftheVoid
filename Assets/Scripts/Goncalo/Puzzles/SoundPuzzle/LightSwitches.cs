@@ -110,4 +110,9 @@ public class LightSwitches : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(wrongSwitchSound.length);
         wrongSoundPlaying = false;
     }
+
+    public void ChangeVisualCues(bool state)
+    {
+        sonarActive = state;
+    }
 }

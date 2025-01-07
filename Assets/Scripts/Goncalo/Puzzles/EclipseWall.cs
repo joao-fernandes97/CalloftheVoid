@@ -5,6 +5,8 @@ public class EclipseWall : MonoBehaviour
     [SerializeField]
     private GameObject wallModel;
     [SerializeField]
+    private GameObject transparentWallModel;
+    [SerializeField]
     private GameObject jupiterSymbol;
     [SerializeField]
     private GameObject saturnSymbol;
@@ -25,7 +27,7 @@ public class EclipseWall : MonoBehaviour
 
     private void Start()
     {
-        materialColor = wallModel.GetComponent<Renderer>().material.color;
+        materialColor = transparentWallModel.GetComponent<Renderer>().material.color;
         jupiterColor = jupiterSymbol.GetComponent<Renderer>().material.color;
         saturnColor = saturnSymbol.GetComponent<Renderer>().material.color;
     }
@@ -38,27 +40,31 @@ public class EclipseWall : MonoBehaviour
             if (alpha <= 0f)
             {
                 alpha = 0f;
+                transparentWallModel.SetActive(false);
                 wallModel.SetActive(false);
             }
         }
         else
         {
             alpha += Time.fixedDeltaTime / timeToDisappear;
-            if (alpha > 1f)
+            if (alpha >= 1f)
             {
                 alpha = 1f;
+                wallModel.SetActive(true);
+                transparentWallModel.SetActive(false);
             }
         }
 
-        if (alpha > 0f)
+        if (alpha > 0f && alpha < 1f)
         {
-            wallModel.SetActive(true);
+            transparentWallModel.SetActive(true);
+            wallModel.SetActive(false);
         }
 
         materialColor = new Color(materialColor.r, materialColor.g, materialColor.b, alpha);
         jupiterColor = new Color(jupiterColor.r, jupiterColor.g, jupiterColor.b, alpha);
         saturnColor = new Color(saturnColor.r, saturnColor.g, saturnColor.b, alpha);
-        wallModel.GetComponent<Renderer>().material.color = materialColor;
+        transparentWallModel.GetComponent<Renderer>().material.color = materialColor;
         jupiterSymbol.GetComponent<Renderer>().material.color = materialColor;
         saturnSymbol.GetComponent<Renderer>().material.color = materialColor;
     }
@@ -91,7 +97,7 @@ public class EclipseWall : MonoBehaviour
     {
         if (other.GetComponent<Lantern>() != null && portalPlanetActive != portalPlanet)
         {
-            wallModel.SetActive(true);
+            transparentWallModel.SetActive(true);
             disappearing = false;
         }
     }

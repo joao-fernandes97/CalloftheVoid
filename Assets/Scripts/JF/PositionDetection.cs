@@ -19,6 +19,7 @@ public class PositionDetection : MonoBehaviour
     private Collider Neptune;
     [SerializeField]
     private Portal portal;
+    [SerializeField]
     private List<Collider> colliderList = new List<Collider>(); 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +31,10 @@ public class PositionDetection : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         Debug.Log("Triggered");
-        colliderList.Add(collider);
+        if (collider.gameObject.GetComponent<Lantern>() == null)
+        {
+            colliderList.Add(collider);
+        }
         
         if (colliderList.Contains(Saturn) && colliderList.Contains(Jupiter) && colliderList.Count == 2)
         {
