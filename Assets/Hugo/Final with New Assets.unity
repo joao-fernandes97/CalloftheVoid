@@ -152,6 +152,7 @@ MonoBehaviour:
   planetInsertionObject: {fileID: 441073818}
   orrery: {fileID: 1851775677}
   pedestal: {fileID: 1540849855}
+  lightSwitches: []
 --- !u!4 &616477
 Transform:
   m_ObjectHideFlags: 0
@@ -5622,6 +5623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallModel: {fileID: 1403304907}
+  transparentWallModel: {fileID: 0}
   jupiterSymbol: {fileID: 227946238}
   saturnSymbol: {fileID: 227946238}
   portal: {fileID: 1406807098}
@@ -8234,6 +8236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallModel: {fileID: 212551564}
+  transparentWallModel: {fileID: 0}
   jupiterSymbol: {fileID: 1984369819}
   saturnSymbol: {fileID: 878559123}
   portal: {fileID: 1406807098}
@@ -8287,6 +8290,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &865213954
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.05164
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.254683
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.945365
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
+      propertyPath: m_Name
+      value: Planet4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bceea328bb36984992372ea249ed6e3, type: 3}
 --- !u!1 &871094683 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3382453539421514095, guid: f1e695242836f44499c139415dc0067d, type: 3}
@@ -13132,7 +13192,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1166139443}
   areYouSurePanel: {fileID: 343115699}
+  visualCuesToggle: {fileID: 0}
   playerMovement: {fileID: 1495948860}
+  gameManager: {fileID: 0}
 --- !u!1 &1319394968
 GameObject:
   m_ObjectHideFlags: 0
@@ -15743,6 +15805,7 @@ MonoBehaviour:
   Saturn: {fileID: 579484979}
   Neptune: {fileID: 232393104}
   portal: {fileID: 1406807098}
+  colliderList: []
 --- !u!65 &1501164506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27810,3 +27873,4 @@ SceneRoots:
   - {fileID: 1053512751}
   - {fileID: 627363337}
   - {fileID: 912759606}
+  - {fileID: 865213954}
