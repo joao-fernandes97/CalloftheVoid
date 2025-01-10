@@ -24,11 +24,14 @@ public class PlayerMovement : MonoBehaviour
     private float maxLookUpAngle;
     [SerializeField]
     private float maxLookDownAngle;
+    [SerializeField]
+    private float headBobMult;
 
 
 
     private CharacterController controller;
     private Transform head;
+    private CinemachineBasicMultiChannelPerlin headBob;
     private Vector3 headRotation;
     private Vector3 velocity;
     private Vector3 motion;
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         //Getting the necessary components
         controller = GetComponent<CharacterController>();
         head = GetComponentInChildren<CinemachineCamera>().transform;
+        headBob = GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
 
         HideCursor();
     }
@@ -57,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateRotation();
         UpdateHead();
+        UpdateHeadBob();
     }
 
     private void HideCursor()
@@ -159,5 +164,25 @@ public class PlayerMovement : MonoBehaviour
         motion = transform.TransformVector(velocity * Time.fixedDeltaTime);
 
         controller.Move(motion);
+    }
+
+    /// <summary>
+    /// Handles head bob amplitude changes for different speeds
+    /// </summary>
+    private void UpdateHeadBob()
+    {
+        if(Mathf.Abs(velocity.z)>=0.1f || Mathf.Abs(velocity.x)>=0.1f){
+            headBob.AmplitudeGain = headBobMult;
+            headBob.FrequencyGain = headBobMult*2;
+        } else
+        {
+            headBob.AmplitudeGain = 1;
+            headBob.FrequencyGain = 1;
+        }
+    }
+
+    public bool IsMoving()
+    {
+        return Mathf.Abs(velocity.z)>=0.1f || Mathf.Abs(velocity.x)>=0.1f;
     }
 }
