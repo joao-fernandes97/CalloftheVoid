@@ -36,7 +36,6 @@ public class PlayerSound : MonoBehaviour
                 {
                     PlayFootstepSound();
                     lastStepTime = Time.time;
-                    Debug.Log("Step");
                 }
             }
         }

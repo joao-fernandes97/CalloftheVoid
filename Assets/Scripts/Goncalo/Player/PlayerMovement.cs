@@ -185,4 +185,10 @@ public class PlayerMovement : MonoBehaviour
     {
         return Mathf.Abs(velocity.z)>=0.1f || Mathf.Abs(velocity.x)>=0.1f;
     }
+
+    private void OnDisable()
+    {
+        velocity = Vector3.zero;
+        UpdateHeadBob();
+    }
 }

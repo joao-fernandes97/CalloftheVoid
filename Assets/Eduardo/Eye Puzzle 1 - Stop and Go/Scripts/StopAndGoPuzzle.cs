@@ -12,6 +12,7 @@ public class StopAndGoPuzzle : MonoBehaviour
 
     [Header("Player Reference")]
     [SerializeField] private GameObject _player;
+    [SerializeField] private AudioSource whisperSource;
     private PlayerMovement _playerMov ;
     private CharacterController _playerCharacterCtrl;
 
@@ -20,8 +21,8 @@ public class StopAndGoPuzzle : MonoBehaviour
     [SerializeField] private Expulsion _expel;
     [SerializeField] private SwapTimer _swapTimer;
     [SerializeField] private float _maxSpeedTolerance = 1f;
-    [SerializeField] private float _failureCountDownSpeed = 0.1f;
-    [SerializeField] private float _failureCountDown = 10f;
+    [SerializeField] private float _failureCountDownSpeed = 0.05f;
+    [SerializeField] private float _failureCountDown = 30f;
     private float _failureCountDownMax;
     private float _playerVelocity;
     private bool _playerFailed = false;
@@ -92,7 +93,7 @@ public class StopAndGoPuzzle : MonoBehaviour
                     Reset();
                     resetGame = true;
 
-                }//if he was inside then stop the game and reset emediatly
+                }//if he was inside then stop the game and reset immediately
                  //trigger once
             }
 
@@ -123,7 +124,7 @@ public class StopAndGoPuzzle : MonoBehaviour
         yield return new WaitForSeconds(time);
         _doorAnimCtrl.SetBool("Open", true);
     }
-    //The  only ouput is "playerFailed"
+    //The only output is "playerFailed"
     //add the timer thing
     private void StartAndStopGame()
     {
@@ -131,7 +132,7 @@ public class StopAndGoPuzzle : MonoBehaviour
 
         if(_swapTimer.MyTurn)
         {
-            vol.weight = 1;
+            //vol.weight = 1;
             if (!_eyesOpenFlag)
             {
                 EnableEyes();
@@ -145,7 +146,8 @@ public class StopAndGoPuzzle : MonoBehaviour
             {
                 CountToFailure();
             }
-            else //Slowly replenish countdown while not moving
+            //Increase overall timer, do not replenish
+            /**else //Slowly replenish countdown while not moving
             {
                 if (_failureCountDownMax > _failureCountDown)
                 {
@@ -157,18 +159,19 @@ public class StopAndGoPuzzle : MonoBehaviour
 
                 }
 
-            }
+            }**/
+            UpdateWhisperVolume();
         }
         else
         {
-            vol.weight = 0;
+            //vol.weight = 0;
             //Debug.Log("His turn");
             if (_eyesOpenFlag)
             {
                 DisableEyes();
                 //Debug.Log("Eyes where closed");
                 _eyesOpenFlag = false;
-                _failureCountDown = _failureCountDownMax;
+                //_failureCountDown = _failureCountDownMax; do not reset
 
             }
             
@@ -189,12 +192,16 @@ public class StopAndGoPuzzle : MonoBehaviour
          //Debug.Log($"CountToFailure {_failureCountDown}");
         if (_failureCountDown > 0.0f)
             _failureCountDown -= _failureCountDownSpeed * Time.fixedDeltaTime;
-
     }
+    
     private void ReplenishCountDown(float rate = 1f)
     {
-
         _failureCountDown += _failureCountDownSpeed * rate * Time.fixedDeltaTime;
+    }
+
+    private void UpdateWhisperVolume()
+    {
+        whisperSource.volume = 1 - _failureCountDown/_failureCountDownMax;
     }
 
     //End game
