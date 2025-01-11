@@ -50,6 +50,7 @@ public class StopAndGoPuzzle : MonoBehaviour
     private void FixedUpdate()
     {
         //if player enters = trigger eyes open and then just keep it that way
+        Debug.Log($">>>Speed= {_playerVelocity}");
         if (_playerInside)
             {
 
@@ -142,8 +143,11 @@ public class StopAndGoPuzzle : MonoBehaviour
             //Debug.Log("My turn");
             //Tracking and counting behavior (game on)
             if (_failureCountDown <= 0.0f) _playerFailed = true;
-            if (_playerVelocity >= _maxSpeedTolerance)
+            //if eyes are open any motion will lead to failure
+            if (_playerVelocity > 0)
             {
+                //hold timer while this is true
+                _swapTimer.MotionDetected();
                 CountToFailure();
             }
             //Increase overall timer, do not replenish
@@ -166,13 +170,17 @@ public class StopAndGoPuzzle : MonoBehaviour
         {
             //vol.weight = 0;
             //Debug.Log("His turn");
-            if (_eyesOpenFlag)
+            //if eyes are closed can only walk, any faster and eyes will open
+            if(_playerVelocity >= _maxSpeedTolerance)
+            {
+                _swapTimer.MotionDetected();
+            } 
+            else if (_eyesOpenFlag)
             {
                 DisableEyes();
                 //Debug.Log("Eyes where closed");
                 _eyesOpenFlag = false;
                 //_failureCountDown = _failureCountDownMax; do not reset
-
             }
             
             //reset vars

@@ -6,7 +6,7 @@ public class SwapTimer : MonoBehaviour
     
     [Header("Timer Parameters")]
     [SerializeField] private float _onTime = 3f;
-    [SerializeField] private float _offTime = 2f;
+    [SerializeField] private float _offTime = 4f;
     [SerializeField] private bool _useRandom = false;
     [SerializeField] private float randomOffset = 0.0f;
     private float _timer;
@@ -80,5 +80,12 @@ public class SwapTimer : MonoBehaviour
         ResetTimer();
         MyTurn = true;
 
-    } 
+    }
+
+    //if motion is detected reset timer and open eyes
+    public void MotionDetected()
+    {
+        MyTurn = true;
+        _timer = _onTime;
+    }
 }

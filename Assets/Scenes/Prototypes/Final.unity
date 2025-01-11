@@ -6407,8 +6407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onTime: 3.5
-  _offTime: 2
-  _useRandom: 1
+  _offTime: 5
+  _useRandom: 0
   randomOffset: 0.2
 --- !u!114 &553583808
 MonoBehaviour:
@@ -9959,6 +9959,10 @@ PrefabInstance:
     - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
       propertyPath: headBobMult
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007980080170519581, guid: f1e695242836f44499c139415dc0067d, type: 3}
+      propertyPath: walkMultiplier
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
