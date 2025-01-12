@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void UpdateHeadBob()
     {
-        if(Mathf.Abs(velocity.z)>=0.1f || Mathf.Abs(velocity.x)>=0.1f){
+        if(Mathf.Abs(velocity.z)>=1f || Mathf.Abs(velocity.x)>=1f){
             headBob.AmplitudeGain = headBobMult;
             headBob.FrequencyGain = headBobMult*2;
         } else

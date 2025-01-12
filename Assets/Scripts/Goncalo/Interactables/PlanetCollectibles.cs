@@ -40,10 +40,10 @@ public class PlanetCollectibles : MonoBehaviour, IInteractable, IUsable
         if (!usedRecently)
         {
             RaycastHit hit;
-            if (Physics.Raycast(cameraCenter.transform.position, cameraCenter.transform.TransformDirection(Vector3.forward), out hit, detectionRange))
+            if (Physics.Raycast(cameraCenter.transform.position, cameraCenter.transform.TransformDirection(Vector3.forward), out hit, detectionRange+2f))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                if (hit.transform.GetComponent<PlanetInsertion>() != null)
+                if (hit.transform.GetComponent<PlanetInsertion>() != null && planetsEnum != 0)
                 {
                     hit.transform.GetComponent<PlanetInsertion>().InsertPlanet(planetsEnum);
                     transform.parent.gameObject.SetActive(false);

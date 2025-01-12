@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject controlPanel;
+    private Collider[] controlPanelButtons;
     [SerializeField]
     private GameObject planetInsertionObject;
     [SerializeField]
@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
 
     public void SoundPuzzleFinished()
     {
-        controlPanel.SetActive(true);
+        foreach (Collider button in controlPanelButtons)
+        {
+            button.enabled = true;
+        }
         orrery.SetActive(true);
         pedestal.SetActive(true);
         planetInsertionObject.SetActive(true);

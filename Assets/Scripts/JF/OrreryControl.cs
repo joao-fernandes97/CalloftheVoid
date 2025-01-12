@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OrreryControl : MonoBehaviour
 {
@@ -27,20 +25,7 @@ public class OrreryControl : MonoBehaviour
     //private Transform[] planetOrbits;
     [SerializeField]
     private List<Transform> planetOrbits;
-    [SerializeField]
-    private CinemachineCamera UICamera;
-    [SerializeField]
-    private Button buttonLeft;
-    [SerializeField]
-    private Button buttonRight;
-    [SerializeField]
-    private Button buttonInner;
-    [SerializeField]
-    private Button buttonOuter;
-    [SerializeField]
-    private Button buttonConfirm;
 
-    private InteractablePanel interactablePanel;
     private int activePlanetOrbitIndex;
     private bool isRotating;
     
@@ -48,24 +33,9 @@ public class OrreryControl : MonoBehaviour
     private void Start()
     {
         activePlanetOrbitIndex = 0;
-        buttonLeft.onClick.AddListener(RotateLeft);
-        buttonRight.onClick.AddListener(RotateRight);
-        buttonOuter.onClick.AddListener(SelectOuter);
-        buttonInner.onClick.AddListener(SelectInner);
-        buttonConfirm.onClick.AddListener(Confirm);
 
         planetsMaskBit = (int)Mathf.Log(planetsMask.value, 2);
         outlineMaskBit = (int)Mathf.Log(outlineMask.value, 2);
-        interactablePanel = GetComponent<InteractablePanel>();
-    }
-
-    private void OnDestroy()
-    {
-        buttonLeft.onClick.RemoveListener(RotateLeft);
-        buttonRight.onClick.RemoveListener(RotateRight);
-        buttonOuter.onClick.RemoveListener(SelectOuter);
-        buttonInner.onClick.RemoveListener(SelectInner);
-        buttonConfirm.onClick.RemoveListener(Confirm);
     }
     
     /// <summary>
@@ -120,7 +90,6 @@ public class OrreryControl : MonoBehaviour
     /// </summary>
     public void Confirm(){
         ResetLayers();
-        interactablePanel.ExitInteraction();
     }
 
 
